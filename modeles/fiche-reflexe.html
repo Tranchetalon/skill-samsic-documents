@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[[Titre de la fiche]]</title>
+<link rel="stylesheet" href="socle/css/fonts.css">
+<link rel="stylesheet" href="socle/css/doc.css">
+<link rel="stylesheet" href="socle/css/fiche-reflexe.css">
+<link rel="stylesheet" href="socle/css/procedure.css">
+</head>
+<!--
+  FICHE RÉFLEXE — une affiche A4, UNE seule page, punaisée au poste.
+
+  data-famille  donne toute la couleur de la feuille :
+                  equipement   Tenue & matériel        (brun)
+                  rh           Démarches RH            (bleu)
+                  sante        Santé & arrêts          (vert)
+                  incident     Incidents & urgences    (rouge)
+                  exploitation Vie du poste            (marine)
+  data-titre    titre court, à l'infinitif ou à l'impératif (« Appeler l'astreinte »)
+  data-maj      date de mise à jour JJ/MM/AAAA
+  data-soustitre de l'en-tête : « N points clés » (N = nombre d'étapes)
+
+  Densité : 4 étapes = classe « fr-page » seule ; 5 étapes : ajouter « compact » ;
+  6 étapes : « compact tres-compact ». Jamais plus de 6 étapes.
+-->
+<body data-famille="exploitation" data-titre="[[Titre de la fiche]]" data-maj="[[JJ/MM/AAAA]]">
+<div class="pr-doc fr-doc">
+
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="[[N]] points clés"
+        data-resume="[[Une phrase : à quoi sert la fiche, ce que l'agent obtient en la suivant.]]"></header>
+
+      <div class="fr-declencheur">
+        <span class="fr-declencheur-lab">Quand ?</span>
+        <div class="fr-declencheur-txt">[[La situation qui déclenche la fiche, avec le mot-clé en <b>gras</b>.]]</div>
+      </div>
+
+      <div class="fr-etapes">
+        <!-- Une carte par étape. --et:var(--et-1) … var(--et-6) dans l'ordre. -->
+        <div class="fr-etape" style="--et:var(--et-1)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">1</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="document"></i></span><span>[[Verbe d'action + objet]]</span></div>
+            <div class="fr-etape-desc">[[Deux phrases au plus. Le geste, puis pourquoi ou comment.]]</div>
+          </div>
+          <div class="fr-etape-vignette"><i data-ic="document"></i></div>
+        </div>
+
+        <div class="fr-etape" style="--et:var(--et-2)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">2</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="personnes"></i></span><span>[[Verbe d'action + objet]]</span></div>
+            <div class="fr-etape-desc">[[Description.]]</div>
+            <!-- Pastilles facultatives : Délai (classe delai), Auprès de, Document. -->
+            <div class="fr-etape-meta">
+              <span class="fr-meta"><span class="fr-meta-lab">Auprès de</span> [[Interlocuteur]]</span>
+            </div>
+          </div>
+          <div class="fr-etape-vignette"><i data-ic="personnes"></i></div>
+        </div>
+
+        <div class="fr-etape" style="--et:var(--et-3)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">3</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="horloge"></i></span><span>[[Verbe d'action + objet]]</span></div>
+            <div class="fr-etape-desc">[[Description.]]</div>
+            <div class="fr-etape-meta">
+              <span class="fr-meta delai"><span class="fr-meta-lab">Délai</span> [[48 h]]</span>
+            </div>
+          </div>
+          <div class="fr-etape-vignette"><i data-ic="horloge"></i></div>
+        </div>
+
+        <div class="fr-etape" style="--et:var(--et-4)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">4</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="coche"></i></span><span>[[Verbe d'action + objet]]</span></div>
+            <div class="fr-etape-desc">[[Description.]]</div>
+          </div>
+          <div class="fr-etape-vignette"><i data-ic="coche"></i></div>
+        </div>
+      </div>
+
+      <!-- Bas de fiche : vigilance et/ou documents. Un seul encart : ajouter « seul » à fr-bas. -->
+      <div class="fr-bas">
+        <section class="fr-encart vigilance">
+          <h3 class="fr-encart-titre"><i data-ic="alerte"></i> Points de vigilance</h3>
+          <ul>
+            <li>[[Ce qui fait échouer la démarche, ou ce qu'il ne faut jamais faire.]]</li>
+            <li>[[Deuxième point.]]</li>
+          </ul>
+        </section>
+        <section class="fr-encart documents">
+          <h3 class="fr-encart-titre"><i data-ic="document"></i> Documents à fournir</h3>
+          <ul>
+            <li>[[Pièce à fournir.]]</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <div data-bandeau></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+</div>
+<script src="socle/js/icones.js"></script>
+<script src="socle/js/logo-b64.js"></script>
+<script src="socle/js/agence.js"></script>
+<script src="socle/js/procedure.js"></script>
+</body>
+</html>

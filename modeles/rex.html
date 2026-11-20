@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REX [[exercice]]</title>
+<link rel="stylesheet" href="socle/css/fonts.css">
+<link rel="stylesheet" href="socle/css/doc.css">
+<link rel="stylesheet" href="socle/css/fiche-reflexe.css">
+<link rel="stylesheet" href="socle/css/procedure.css">
+<link rel="stylesheet" href="socle/css/rex.css">
+</head>
+<!--
+  RETOUR D'EXPÉRIENCE D'EXERCICE — rapport de 4 à 7 pages, lu par le client et l'encadrement.
+  Plan fixe : synthèse · Partie 1 le sujet (comprendre le risque) · Partie 2 l'organisation ·
+  Partie 3 le déroulement (chronologie + évaluation) · Partie 4 le retour d'expérience
+  (points forts / à améliorer + plan d'actions). Une partie longue prend une page de plus,
+  avec le même sous-titre « Partie N · … ».
+  Couleurs : marine + bleu SAMSIC uniquement, sauf l'échelle d'évaluation (vert / ambre / rouge).
+-->
+<body data-famille="rex" data-titre="Retour d’expérience" data-maj="[[JJ/MM/AAAA]]">
+<div class="pr-doc fr-doc">
+
+  <!-- ============================================================ PAGE 1 — SYNTHÈSE -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="Exercice [[sûreté | incendie | SSIAP]] · [[Thème]]"
+        data-resume="[[Exercice inopiné / annoncé de … Ce document explique …, décrit l’organisation et le déroulement de l’exercice, puis en tire les enseignements.]]"></header>
+      <!-- Si le document montre la protection d'un site sensible (Seveso, OIV) : -->
+      <div><span class="rx-restreint"><i data-ic="cadenas"></i> Diffusion restreinte · [[contient des informations sur la protection du site]]</span></div>
+
+      <div class="rx-id">
+        <div><div class="rx-lab">Date</div><div class="rx-val"><b>[[Jour JJ/MM/AAAA]]</b><br>à [[16 h 50]]</div></div>
+        <div><div class="rx-lab">Lieu</div><div class="rx-val"><b>[[Site]]</b><br>[[Zone]]</div></div>
+        <div><div class="rx-lab">Nature</div><div class="rx-val"><b>[[Exercice inopiné]]</b><br>[[Thème]]</div></div>
+        <div class="large"><div class="rx-lab">Thème</div><div class="rx-val">[[Scénario en une phrase : ce qui est simulé et ce qu’on veut <b>vérifier</b>.]]</div></div>
+        <div><div class="rx-lab">Durée</div><div class="rx-val"><b>[[30 minutes]]</b><br>[[16 h 50 → 17 h 20]]</div></div>
+        <div class="plein"><div class="rx-lab">Équipes concernées</div><div class="rx-val"><b>[[NOM Prénom]]</b>, [[fonction]] · <b>[[NOM Prénom]]</b>, [[fonction]]</div></div>
+        <div class="plein"><div class="rx-lab">Liste de diffusion</div><div class="rx-val">[[M. NOM · Mme NOM · …]]</div></div>
+      </div>
+
+      <div class="pr-section"><i data-ic="cible"></i> En résumé</div>
+      <div class="pr-fort">
+        <span class="pr-fort-ic"><i data-ic="loupe"></i></span>
+        <div class="pr-fort-txt">
+          <b class="titre">Résultat global : [[acquis | en cours d’acquisition | non acquis]]</b>
+          [[Ce qui a fonctionné, en une phrase. En revanche, <b>le point faible principal</b>, et ses conséquences.]]
+        </div>
+      </div>
+
+      <div class="pr-tuiles" style="margin-top:3mm">
+        <div class="pr-tuile" style="--t:var(--et-1)">
+          <span class="pr-tuile-ic"><i data-ic="eclair"></i></span>
+          <div><div class="pr-tuile-titre">Partie 1 · [[Le sujet]]</div>
+            <div class="pr-tuile-txt">[[Comprendre le risque et ce que l’agent doit faire.]]</div></div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--et-2)">
+          <span class="pr-tuile-ic"><i data-ic="calendrier"></i></span>
+          <div><div class="pr-tuile-titre">Partie 2 · L’organisation</div>
+            <div class="pr-tuile-txt">La préparation de l’exercice, et la check-list des prochains exercices.</div></div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--et-2)">
+          <span class="pr-tuile-ic"><i data-ic="horloge"></i></span>
+          <div><div class="pr-tuile-titre">Partie 3 · Le déroulement</div>
+            <div class="pr-tuile-txt">La chronologie et l’évaluation des [[N]] objectifs.</div></div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--et-1)">
+          <span class="pr-tuile-ic"><i data-ic="fusee"></i></span>
+          <div><div class="pr-tuile-titre">Partie 4 · Le retour d’expérience</div>
+            <div class="pr-tuile-txt">Points forts, points à améliorer et plan d’actions.</div></div>
+        </div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ PAGE 2 — PARTIE 1 -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="Partie 1 · [[Le sujet]]"></header>
+
+      <div class="pr-section"><i data-ic="eclair"></i> [[Comment fonctionne …]]</div>
+      <p class="rx-txt">[[Explication simple du dispositif ou du risque, mots-clés en <b>gras</b>.]]</p>
+
+      <!-- Photos : 2 par ligne (rx-photos) ou une grande (rx-photo grande). Images dans img/. -->
+      <!--
+      <div class="rx-photos">
+        <figure class="rx-photo"><img src="img/photo-1.jpg" alt=""><figcaption><b>Titre.</b> Légende.</figcaption></figure>
+        <figure class="rx-photo"><img src="img/photo-2.jpg" alt=""><figcaption><b>Titre.</b> Légende.</figcaption></figure>
+      </div>
+      -->
+
+      <table class="rx-table">
+        <tr><th style="width:30%">[[Caractéristique]]</th><th>[[Ce que ça veut dire sur le terrain]]</th></tr>
+        <tr><td>[[…]]</td><td>[[…]]</td></tr>
+        <tr><td>[[…]]</td><td>[[…]]</td></tr>
+      </table>
+
+      <div class="pr-section"><i data-ic="bouclier"></i> Ce que l’agent fait face à [[…]]</div>
+      <div class="pr-check pr-cas">
+        <ul>
+          <li><b>[[Verbe]]</b> : [[le geste attendu.]]</li>
+          <li><b>[[Verbe]]</b> : [[le geste attendu.]]</li>
+          <li><b>[[Verbe]]</b> : [[le geste attendu.]]</li>
+        </ul>
+      </div>
+      <div class="pr-fort">
+        <span class="pr-fort-ic"><i data-ic="alerte"></i></span>
+        <div class="pr-fort-txt">
+          <b class="titre">[[La règle à retenir]]</b>
+          [[Pourquoi, en deux phrases.]]
+        </div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ PAGE 3 — PARTIE 2 -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="Partie 2 · L’organisation de l’exercice"></header>
+
+      <div class="fr-etapes" style="margin-top:4mm">
+        <div class="fr-etape" style="--et:var(--et-1)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">1</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>[[Préparer un exercice inopiné]]</span></div>
+            <div class="fr-etape-desc">[[Qui est prévenu, qui ne l’est pas, et pourquoi.]]</div></div>
+          <div class="fr-etape-vignette"><i data-ic="personnes"></i></div>
+        </div>
+        <div class="fr-etape" style="--et:var(--et-2)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">2</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>[[Choisir le lieu]]</span></div>
+            <div class="fr-etape-desc">[[Zones, moyens couverts.]]</div></div>
+          <div class="fr-etape-vignette"><i data-ic="cible"></i></div>
+        </div>
+        <div class="fr-etape" style="--et:var(--et-3)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">3</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>[[Fixer les modalités]]</span></div>
+            <div class="fr-etape-desc">[[Scénario, équipes évaluées, objectifs observés (voir partie 3).]]</div></div>
+          <div class="fr-etape-vignette"><i data-ic="document"></i></div>
+        </div>
+        <div class="fr-etape" style="--et:var(--et-4)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">4</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>Jouer l’exercice, puis l’analyser</span></div>
+            <div class="fr-etape-desc">[[Date, horaires, puis compte rendu et présent retour d’expérience.]]</div></div>
+          <div class="fr-etape-vignette"><i data-ic="horloge"></i></div>
+        </div>
+      </div>
+
+      <div class="pr-section"><i data-ic="coche"></i> Pour les prochains exercices : check-list</div>
+      <div class="pr-check">
+        <ul>
+          <li><b>Scénario validé par écrit</b> avec le client : zones, horaires, objectifs.</li>
+          <li><b>Matériel vérifié avant l’exercice</b> : une panne découverte en cours de route est signalée à part.</li>
+          <li><b>Un arbitre sur le terrain</b> et <b>un observateur au PC</b> avec la grille d’évaluation et un chronomètre.</li>
+          <li><b>Règle d’arrêt convenue</b> : « exercice » annoncé avant tout appel extérieur (17, 18), pour qu’aucun moyen ne soit engagé à tort.</li>
+          <li><b>Débriefing à chaud</b> avec les équipes, juste après la fin de l’exercice.</li>
+          <li>[[Point propre à ce thème.]]</li>
+        </ul>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ PAGE 4 — PARTIE 3 -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="Partie 3 · Le déroulement de l’exercice"></header>
+
+      <div class="pr-section"><i data-ic="horloge"></i> Chronologie</div>
+      <!-- Heures au format 16h50 ; « fort » = début, fin et moments clés (point plein). -->
+      <ol class="rx-chrono">
+        <li class="fort"><span class="rx-heure">[[16h50]]</span><div class="rx-quoi"><b>Début de l’exercice</b> : [[déclenchement]].</div></li>
+        <li><span class="rx-heure">[[16h52]]</span><div class="rx-quoi">[[Qui fait quoi.]]<small>[[Précision facultative.]]</small></div></li>
+        <li><span class="rx-heure">[[16h55]]</span><div class="rx-quoi">[[Qui fait quoi.]]</div></li>
+        <li class="fort"><span class="rx-heure">[[17h20]]</span><div class="rx-quoi"><b>Fin de l’exercice.</b></div></li>
+      </ol>
+
+      <div class="pr-section"><i data-ic="cible"></i> Évaluation des objectifs</div>
+      <!-- Trois niveaux seulement : ok = Acquis · cours = En cours d’acquisition · non = Non acquis. -->
+      <div class="rx-eval">
+        <div><span>Gestion de la situation par le chef de poste</span><span class="rx-niv ok">Acquis</span></div>
+        <div><span>Mise en place de l’intervention</span><span class="rx-niv cours">En cours d’acquisition</span></div>
+        <div><span>Gestion de l’intervention</span><span class="rx-niv cours">En cours d’acquisition</span></div>
+        <div><span>Connaissance et application des consignes</span><span class="rx-niv cours">En cours d’acquisition</span></div>
+        <div><span>Gestion de la situation par les agents</span><span class="rx-niv ok">Acquis</span></div>
+        <div><span>Bonne utilisation des communications radio</span><span class="rx-niv ok">Acquis</span></div>
+        <div><span>Gestion de la situation par l’agent vidéo</span><span class="rx-niv non">Non acquis</span></div>
+        <div class="global"><span>Analyse opérationnelle globale</span><span class="rx-niv cours">En cours d’acquisition</span></div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ PAGE 5 — PARTIE 4 -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="Partie 4 · Le retour d’expérience"></header>
+
+      <div class="rx-bilan" style="margin-top:4mm">
+        <div style="--t:var(--dom)">
+          <h3><i data-ic="coche"></i> Points forts</h3>
+          <ul>
+            <li><b>[[Constat]]</b> : [[fait observé.]]</li>
+            <li><b>[[Constat]]</b> : [[fait observé.]]</li>
+          </ul>
+        </div>
+        <div style="--t:var(--acc)">
+          <h3><i data-ic="alerte"></i> Points à améliorer</h3>
+          <ul>
+            <li><b>[[Constat]]</b> : [[fait observé, sans jugement de personne.]]</li>
+            <li><b>[[Constat]]</b> : [[fait observé.]]</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pr-section"><i data-ic="fusee"></i> Plan d’actions</div>
+      <table class="rx-table">
+        <tr><th style="width:5%">#</th><th>Action</th><th style="width:21%">Pilote</th><th style="width:17%">Échéance</th></tr>
+        <tr><td>1</td><td>[[Rappeler la consigne … à tous les agents.]]</td><td>[[SAMSIC]]</td><td><span class="pr-champ"></span></td></tr>
+        <tr><td>2</td><td>[[Signaler au client …]]</td><td>[[Chef de poste]]</td><td><span class="pr-champ"></span></td></tr>
+        <tr><td>3</td><td>Présenter ce retour d’expérience à toutes les équipes du site.</td><td>[[Chef de poste]]</td><td><span class="pr-champ"></span></td></tr>
+        <tr><td>4</td><td>Renouveler l’exercice [[de nuit, à l’improviste…]] pour mesurer les progrès.</td><td>SAMSIC et client</td><td><span class="pr-champ"></span></td></tr>
+      </table>
+
+      <div class="pr-ressort"></div>
+      <div data-bandeau data-l1="[[La leçon de l’exercice en une phrase.]]" data-l2="[[Les 3 ou 4 gestes, séparés par · ]]"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+</div>
+<script src="socle/js/icones.js"></script>
+<script src="socle/js/logo-b64.js"></script>
+<script src="socle/js/agence.js"></script>
+<script src="socle/js/procedure.js"></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+/* ============================================================================
+   procedure.css — Fiches procédure agents (2 pages A4 maximum)
+
+   Même design que la fiche réflexe (css/fiche-reflexe.css, chargé avant ce
+   fichier) : cartouche SAMSIC, cartes d'étapes numérotées, bandeau de clôture,
+   pied légal. Ce fichier n'ajoute que ce dont une CONSIGNE a besoin et qu'une
+   affiche d'une page n'a pas : captures d'écran, QR code, tuiles « pourquoi »,
+   cases à cocher, champs à remplir au stylo.
+   ========================================================================== */
+
+@page { size: A4 portrait; margin: 0; }
+
+html, body { margin: 0; padding: 0; background: #E9EDF1; }
+body { font-family: var(--font-texte); }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+/* Une feuille = exactement un A4. La hauteur est FIXE (et non minimale) :
+   c'est ce qui garantit à l'impression qu'une feuille ne pousse jamais une
+   feuille blanche supplémentaire. */
+.pr-doc { display: flex; flex-direction: column; align-items: center; gap: 8mm; padding: 8mm 0; }
+.pr-doc .doc-page.fr-page {
+  width: 210mm; height: 297mm; min-height: 0;
+  padding: var(--marge);
+  box-shadow: 0 2px 12px rgba(34, 52, 74, .15);
+  overflow: hidden;
+}
+.pr-doc .fr-frame { height: 100%; min-height: 0; box-sizing: border-box; }
+@media print {
+  html, body { background: #fff; }
+  .pr-doc { display: block; padding: 0; gap: 0; }
+  .pr-doc .doc-page.fr-page { box-shadow: none; break-after: page; page-break-after: always; }
+  .pr-doc .doc-page.fr-page:last-child { break-after: auto; page-break-after: auto; }
+}
+
+/* Numéro de page dans le pied : « 1 / 2 ». Discret, mais il dit à l'agent
+   qu'il y a une suite au verso. */
+.pr-num { font-weight: 700; color: var(--dom); }
+
+/* ----------------------------------------------------- Titres de section */
+.pr-section {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-titre);
+  font-size: 14px; font-weight: 800; letter-spacing: -.1px; text-transform: uppercase;
+  color: var(--dom);
+  margin: 5mm 0 2.5mm;
+}
+.pr-section::after {
+  content: ''; flex: 1; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--acc), transparent);
+}
+.pr-section svg { width: 5mm; height: 5mm; flex: 0 0 auto; }
+
+/* --------------------------------------------- Contenu enrichi des cartes */
+.fr-etape-desc b { color: #2b3641; }
+.pr-liste { margin: 3px 0 0; padding-left: 15px; }
+.pr-liste li { font-size: 10.5px; line-height: 1.45; color: #4A5C74; margin-bottom: 1px; }
+.pr-liste li b { color: #2b3641; }
+
+/* Adresse web ou numéro : en gras et en police de titre, pour se lire tel
+   qu'on doit le taper. */
+.pr-url {
+  font-family: var(--font-titre); font-weight: 800; color: var(--et, var(--dom));
+  letter-spacing: -.1px;
+}
+
+/* Carte « large » : la vignette d'icône cède la place à un contenu plus
+   grand (QR code, capture) et la carte gagne en hauteur. */
+.fr-etape.pr-large .fr-etape-txt { justify-content: flex-start; padding-top: 3mm; padding-bottom: 3mm; }
+
+/* Capture d'écran, pleine largeur de la carte. Le cadre arrondi et l'ombre
+   sont déjà dans l'image : on ne rajoute qu'un fond neutre. */
+.pr-capture {
+  display: block; width: 100%; height: auto;
+  margin-top: 2.5mm;
+  border-radius: 2.5mm;
+}
+.pr-capture-legende {
+  font-size: 8.5px; color: #7d8894; font-style: italic;
+  margin-top: 1mm; text-align: center;
+}
+
+/* QR code : grand, sur fond blanc, avec sa marge de silence. */
+.pr-qr {
+  flex: 0 0 auto; align-self: center;
+  margin-right: 4mm;
+  display: flex; flex-direction: column; align-items: center; gap: 1.5mm;
+}
+.pr-qr img {
+  width: 30mm; height: 30mm; display: block;
+  padding: 1.5mm; background: #fff;
+  border: 1.5px solid var(--et, var(--dom)); border-radius: 2.5mm;
+  image-rendering: pixelated;
+}
+.pr-qr span {
+  font-size: 8px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--et, var(--dom));
+}
+
+/* Gros chiffre dans la vignette (le « 17 »). */
+.pr-gros-num {
+  flex: 0 0 auto; align-self: center;
+  margin-right: 4mm;
+  width: 24mm; height: 18mm; border-radius: 3mm;
+  background: var(--et, var(--dom)); color: #fff;
+  display: flex; align-items: center; justify-content: center; gap: 1.5mm;
+  font-family: var(--font-titre); font-size: 34px; font-weight: 800; letter-spacing: -1px;
+}
+.pr-gros-num svg { width: 7mm; height: 7mm; }
+
+/* Pastilles « quoi / où / quand / qui ». */
+.pr-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.pr-chip {
+  font-family: var(--font-titre); font-size: 10.5px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .02em;
+  padding: 2px 9px; border-radius: 20px;
+  background: color-mix(in srgb, var(--et, var(--dom)) 10%, #fff);
+  color: var(--et, var(--dom));
+  border: 1px solid color-mix(in srgb, var(--et, var(--dom)) 35%, #fff);
+}
+
+/* --------------------------------------------------- Tuiles « pourquoi » */
+.pr-tuiles { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+.pr-tuile {
+  display: flex; gap: 3mm; align-items: flex-start;
+  background: #fff; border-radius: 3mm;
+  padding: 3.6mm 4mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07);
+  border-top: 3px solid var(--t, var(--dom));
+  break-inside: avoid;
+}
+.pr-tuile.pleine { grid-column: 1 / -1; }
+.pr-tuile-ic {
+  flex: 0 0 9mm; width: 9mm; height: 9mm; border-radius: 50%;
+  background: color-mix(in srgb, var(--t, var(--dom)) 10%, #fff);
+  color: var(--t, var(--dom));
+  display: grid; place-items: center;
+}
+.pr-tuile-ic svg { width: 5mm; height: 5mm; }
+.pr-tuile-titre {
+  font-family: var(--font-titre); font-size: 12.8px; font-weight: 800; line-height: 1.15;
+  color: var(--t, var(--dom)); margin-bottom: 2px;
+}
+.pr-tuile-txt { font-size: 10.4px; line-height: 1.45; color: #4A5C74; }
+
+/* -------------------------------------------------------- Cases à cocher */
+.pr-check {
+  background: #fff; border-radius: 3mm; padding: 3.5mm 5mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07);
+  border-left: 4px solid var(--dom);
+  break-inside: avoid;
+}
+.pr-check ul { list-style: none; margin: 0; padding: 0; }
+.pr-check li {
+  position: relative; padding-left: 7.5mm !important;
+  font-size: 11px; line-height: 1.4; color: #2b3641;
+  padding: 1.6mm 0; border-bottom: 1px dashed #E4E9EE;
+}
+.pr-check li:last-child { border-bottom: none; }
+/* Variante « liste de cas » : une puce à la place de la case à cocher. */
+.pr-check.pr-cas li { padding-left: 5.5mm !important; }
+.pr-check.pr-cas li::before {
+  width: 2mm; height: 2mm; top: 2.9mm; left: 1mm;
+  border: none; border-radius: 50%; background: var(--acc);
+}
+.pr-check li::before {
+  content: ''; position: absolute; left: 0; top: 1.7mm; width: 4.2mm; height: 4.2mm; box-sizing: border-box;
+  border: 1.6px solid var(--dom); border-radius: 1mm; background: #fff;
+}
+
+/* -------------------------------------------------- Message fort / alerte */
+.pr-fort {
+  display: flex; align-items: center; gap: 4mm;
+  background: color-mix(in srgb, var(--dom) 7%, #fff);
+  border: 1.5px solid var(--dom);
+  border-radius: 3mm; padding: 3.5mm 5mm;
+  margin-top: 3mm;
+  break-inside: avoid;
+}
+.pr-fort-ic {
+  flex: 0 0 10mm; width: 10mm; height: 10mm; border-radius: 50%;
+  background: var(--dom); color: #fff; display: grid; place-items: center;
+}
+.pr-fort-ic svg { width: 5.5mm; height: 5.5mm; }
+.pr-fort-txt { font-size: 11px; line-height: 1.45; color: #2b3641; }
+.pr-fort-txt b.titre {
+  display: block;
+  font-family: var(--font-titre); font-size: 14px; font-weight: 800; text-transform: uppercase;
+  color: var(--dom); margin-bottom: 1px;
+}
+
+/* Comparaison « bon document / mauvais document ». */
+.pr-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 2.5mm; }
+.pr-duo > div {
+  border-radius: 3mm; padding: 3mm 4mm; break-inside: avoid;
+  display: flex; gap: 3mm; align-items: flex-start;
+}
+.pr-duo .oui { background: #EEF6F0; border: 1.5px solid #3E7B54; }
+.pr-duo .non { background: #FBEDEB; border: 1.5px solid #A4453A; }
+.pr-duo .signe {
+  flex: 0 0 9mm; height: 9mm; border-radius: 50%; color: #fff;
+  display: grid; place-items: center;
+}
+.pr-duo .oui .signe { background: #3E7B54; }
+.pr-duo .non .signe { background: #A4453A; }
+.pr-duo .signe svg { width: 5mm; height: 5mm; stroke-width: 2.6; }
+.pr-duo b.titre { display: block; font-family: var(--font-titre); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+.pr-duo .oui b.titre { color: #2E6444; }
+.pr-duo .non b.titre { color: #8C2F26; }
+.pr-duo p { margin: 1px 0 0; font-size: 9.8px; line-height: 1.45; color: #4A5C74; }
+
+/* Champ à compléter au stylo par l'agence avant diffusion. */
+.pr-champ {
+  display: inline-block; min-width: 42mm;
+  border-bottom: 1.3px solid #7d8894;
+  height: 1.1em; vertical-align: bottom;
+}
+.pr-champ.long { min-width: 70mm; }
+
+/* Exemple de rédaction : encadré « papier ». */
+.pr-exemple {
+  background: #fff; border: 1px solid #E4E9EE; border-radius: 3mm;
+  padding: 3mm 4.5mm; margin-top: 2.5mm;
+  font-size: 10.3px; line-height: 1.5; color: #2b3641;
+  break-inside: avoid;
+}
+.pr-exemple-lab {
+  font-size: 8.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: #3E7B54; margin-bottom: 1.5mm; display: flex; align-items: center; gap: 5px;
+}
+.pr-exemple-lab svg { width: 4mm; height: 4mm; }
+.pr-exemple-lab.non { color: #A4453A; }
+.pr-exemple q { font-style: italic; quotes: '« ' ' »'; }
+
+.pr-deux { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+
+/* Pousse le bas de la feuille (bandeau + pied) contre le bord inférieur. */
+.pr-ressort { flex: 1; min-height: 2mm; }
+
+/* Textes de référence (accords, convention) : en petit, en bas de feuille.
+   L'agent ne les lit pas, mais ils montrent que la règle n'est pas inventée. */
+.pr-refs {
+  display: flex; gap: 2.5mm; align-items: flex-start;
+  margin-top: 3mm; padding: 2.5mm 4mm;
+  border-top: 1px solid #E4E9EE;
+  font-size: 8.6px; line-height: 1.45; color: #6b7785;
+}
+.pr-refs svg { flex: 0 0 auto; width: 3.8mm; height: 3.8mm; color: var(--acc); margin-top: .3mm; }
+.pr-refs b { color: #4A5C74; }
+
+/* Familles « consigne », « rex » et « mase » : plus aucune trace d'or, le
+   bleu ciel SAMSIC le remplace aussi là où fiche-reflexe.css l'écrit en dur. */
+:is(body[data-famille="consigne"], body[data-famille="rex"], body[data-famille="mase"]) .fr-bandeau-l2 { color: #6FC1EA; }
+:is(body[data-famille="consigne"], body[data-famille="rex"], body[data-famille="mase"]) .fr-pied-filet { color: var(--acc); }
+:is(body[data-famille="consigne"], body[data-famille="rex"], body[data-famille="mase"]) .pr-exemple-lab { color: var(--acc); }
+:is(body[data-famille="consigne"], body[data-famille="rex"], body[data-famille="mase"]) .fr-pied-filet::before,
+:is(body[data-famille="consigne"], body[data-famille="rex"], body[data-famille="mase"]) .fr-pied-filet::after {
+  background: linear-gradient(90deg, transparent, #B9DCEF, transparent);
+}
+
+/* Grande date butoir, dans la vignette d'une carte. */
+.pr-date {
+  flex: 0 0 auto; align-self: center; margin-right: 4mm;
+  width: 26mm; padding: 2mm 0; border-radius: 3mm;
+  background: var(--et, var(--dom)); color: #fff; text-align: center;
+  font-family: var(--font-titre); line-height: 1;
+}
+.pr-date b { display: block; font-size: 30px; font-weight: 800; letter-spacing: -1px; }
+.pr-date span { display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-top: 1mm; }
+
+/* Capture un peu réduite, centrée, quand la feuille est juste. */
+.pr-capture.moyen { width: 86%; margin-left: auto; margin-right: auto; }

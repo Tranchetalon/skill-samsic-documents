@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synthèse REX [[exercice]]</title>
+<link rel="stylesheet" href="socle/css/fonts.css">
+<style>
+/* ============================================================================
+   SYNTHÈSE CLIENT D’UN REX — une slide 16:9 (13,33 × 7,5 in)
+
+   Version courte du rapport REX, pour qu'un collègue la présente
+   au client : les grandes lignes seulement, sans noms d'agents ni grille
+   détaillée. Même charte (marine #22344A, bleu SAMSIC #0083BE).
+   ========================================================================== */
+@page { size: 13.333in 7.5in; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #e9edf1; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+.slide {
+  --dom: #22344A; --dom-fonce: #18252f; --acc: #0083BE; --ok: #3E7B54; --prog: #B7791F;
+  width: 1280px; height: 720px; margin: 0 auto; overflow: hidden;
+  display: grid; grid-template-rows: auto 1fr auto;
+  background: linear-gradient(170deg, #F7F9FB 0%, #FBFCFD 55%, #F3F6F9 100%);
+  color: #1F2933; font-family: var(--font-texte);
+}
+.ic { width: 1em; height: 1em; display: block; }
+
+/* ------------------------------------------------------------------ En-tête */
+.entete { display: flex; align-items: stretch; }
+.entete-txt { flex: 1; padding: 22px 36px 0; }
+.surtitre {
+  font-family: var(--font-titre); font-size: 14px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--acc);
+}
+h1 {
+  font-family: var(--font-titre); font-size: 40px; font-weight: 800;
+  letter-spacing: -1.4px; line-height: 1; text-transform: uppercase;
+  color: var(--dom); margin: 4px 0 0;
+}
+.infos { display: flex; gap: 22px; margin-top: 10px; font-size: 14px; color: #4a5866; }
+.infos span { display: flex; align-items: center; gap: 6px; }
+.infos .ic { color: var(--acc); width: 16px; height: 16px; }
+.infos b { color: var(--dom); }
+.cartouche {
+  width: 210px; padding: 18px 22px 16px 46px;
+  background: linear-gradient(155deg, var(--dom) 0%, var(--dom-fonce) 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 46px 100%, 0 calc(100% - 46px));
+  filter: drop-shadow(0 4px 0 var(--acc));
+  display: flex; flex-direction: column; align-items: center; gap: 8px; color: #fff;
+}
+.cartouche img { width: 70px; border-radius: 7px; }
+.cartouche div { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: .82; text-align: center; }
+
+/* ------------------------------------------------------------------- Corps */
+.corps {
+  display: grid; grid-template-columns: 430px 1fr; gap: 22px;
+  padding: 14px 36px 0; min-height: 0;
+}
+.photo {
+  position: relative; margin: 0; border-radius: 10px; overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(34, 52, 74, .12);
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: scale(1.45); transform-origin: 50% 92%; }
+.photo figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 16px 12px;
+  background: linear-gradient(transparent, rgba(16, 26, 36, .88));
+  color: #fff; font-size: 12.5px; line-height: 1.4;
+}
+.photo figcaption b { display: block; font-family: var(--font-titre); font-size: 15px; }
+.photo .restreint {
+  position: absolute; top: 10px; left: 10px; padding: 4px 9px; border-radius: 20px;
+  background: rgba(16, 26, 36, .7); color: #fff; font-size: 10px; font-weight: 600;
+  letter-spacing: .04em; display: flex; align-items: center; gap: 5px;
+}
+.photo .restreint .ic { width: 11px; height: 11px; }
+
+.droite { display: flex; flex-direction: column; gap: 11px; min-height: 0; }
+
+.scenario {
+  display: flex; gap: 14px; align-items: center;
+  padding: 9px 16px; border-radius: 10px; background: #fff;
+  border-left: 5px solid var(--acc); box-shadow: 0 0 0 1px rgba(34, 52, 74, .08);
+  font-size: 13.5px; line-height: 1.42;
+}
+.scenario .ic { width: 30px; height: 30px; color: var(--acc); flex: 0 0 auto; }
+
+/* Chiffres clés */
+.chiffres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.chiffre {
+  padding: 9px 14px; border-radius: 10px; background: var(--dom); color: #fff;
+}
+.chiffre:nth-child(even) { background: var(--acc); }
+.chiffre .val { font-family: var(--font-titre); font-size: 28px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+.chiffre .val small { font-size: 17px; font-weight: 700; letter-spacing: 0; }
+.chiffre .lib { font-size: 12px; line-height: 1.28; margin-top: 4px; opacity: .92; }
+
+/* Chronologie horizontale */
+.chrono { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); padding-top: 4px; }
+.chrono::before {
+  content: ''; position: absolute; left: 8.33%; right: 8.33%; top: 13px; height: 2px;
+  background: linear-gradient(90deg, var(--dom), var(--acc));
+}
+.etape { position: relative; text-align: center; padding: 0 4px; }
+.etape .pt {
+  width: 20px; height: 20px; margin: 0 auto; border-radius: 50%;
+  background: #fff; border: 3px solid var(--acc);
+}
+.etape.cle .pt { background: var(--dom); border-color: var(--dom); }
+.etape .h { font-family: var(--font-titre); font-size: 15px; font-weight: 800; color: var(--dom); margin-top: 6px; }
+.etape .q { font-size: 12px; line-height: 1.3; color: #4a5866; margin-top: 2px; }
+
+/* Bilan en trois cartes */
+.bilan { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; flex: 1; min-height: 0; }
+.carte {
+  background: #fff; border-radius: 10px; padding: 10px 14px;
+  box-shadow: 0 0 0 1px rgba(34, 52, 74, .08); border-top: 5px solid var(--t);
+}
+.carte h3 {
+  display: flex; align-items: center; gap: 7px; margin: 0 0 6px;
+  font-family: var(--font-titre); font-size: 15px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -.2px; color: var(--t);
+}
+.carte h3 .ic { width: 18px; height: 18px; }
+.carte ul { margin: 0; padding: 0; list-style: none; }
+.carte li { position: relative; padding-left: 14px; font-size: 12.5px; line-height: 1.34; margin-bottom: 4px; }
+.carte li::before {
+  content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--t);
+}
+.carte li b { color: var(--dom); }
+
+/* ------------------------------------------------------------------ Pied */
+.pied {
+  display: flex; align-items: center; gap: 16px; margin: 14px 36px 0;
+  padding: 12px 20px; border-radius: 10px 10px 0 0;
+  background: linear-gradient(120deg, var(--dom) 0%, var(--dom-fonce) 100%); color: #fff;
+}
+.pied .med {
+  width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #6FB6E8;
+  color: #6FB6E8; display: grid; place-items: center; flex: 0 0 auto;
+}
+.pied .med .ic { width: 17px; height: 17px; }
+.pied .msg { flex: 1; font-family: var(--font-titre); font-size: 15px; font-weight: 800; text-transform: uppercase; }
+.pied .msg span { display: block; font-size: 12px; font-weight: 700; letter-spacing: .03em; color: #6FB6E8; margin-top: 1px; }
+.pied .legal { font-size: 8.5px; line-height: 1.45; text-align: right; opacity: .72; }
+
+@media screen { body { padding: 24px 0; } .slide { box-shadow: 0 10px 40px rgba(0, 0, 0, .15); } }
+</style>
+</head>
+<!--
+  Règles : AUCUN nom d'agent (on parle de fonctions : chef de poste, agent vidéo, rondier).
+  4 chiffres clés, 4 à 6 étapes de chronologie, 3 cartes de bilan de 3 à 4 puces courtes.
+  Photo : img/… (vue du site, du matériel, de l'exercice). Sans photo : supprimer <figure>
+  et passer .corps en une colonne (style="grid-template-columns:1fr").
+-->
+<body data-famille="rex">
+<div class="slide">
+
+  <header class="entete">
+    <div class="entete-txt">
+      <div class="surtitre">Retour d’expérience · Exercice [[sûreté]]</div>
+      <h1>[[Exercice …]]</h1>
+      <div class="infos">
+        <span><i data-ic="calendrier"></i><b>[[12 octobre 2026]]</b>, [[12 h 00]]</span>
+        <span><i data-ic="batiment"></i><b>[[Site]]</b>, [[zone]]</span>
+        <span><i data-ic="horloge"></i><b>[[8 minutes]]</b> d’exercice</span>
+        <span><i data-ic="personnes"></i>[[Chef de poste, agent vidéo, rondier]]</span>
+      </div>
+    </div>
+    <div class="cartouche">
+      <img data-logo alt="SAMSIC Sécurité">
+      <div>Sécurité · Rigueur · Professionnalisme</div>
+    </div>
+  </header>
+
+  <main class="corps">
+    <figure class="photo">
+      <img src="img/[[photo.jpg]]" alt="">
+      <span class="restreint"><i data-ic="cadenas"></i> Diffusion restreinte</span>
+      <figcaption><b>[[Titre de la photo]]</b>
+        [[Légende en une phrase.]]</figcaption>
+    </figure>
+
+    <div class="droite">
+      <div class="scenario">
+        <i data-ic="antenne"></i>
+        <div>Scénario : [[ce qui est simulé]]. Objectif : vérifier que nos équipes [[détectent, alertent et documentent]],
+          <b>[[la règle de sécurité]]</b>.</div>
+      </div>
+
+      <div class="chiffres">
+        <div class="chiffre"><div class="val">[[1]] <small>min</small></div><div class="lib">[[pour …]]</div></div>
+        <div class="chiffre"><div class="val">[[6]] <small>min</small></div><div class="lib">[[pour …]]</div></div>
+        <div class="chiffre"><div class="val">[[0]]</div><div class="lib">[[…]]</div></div>
+        <div class="chiffre"><div class="val">[[4]] <small>/ [[7]]</small></div><div class="lib">objectifs acquis, [[2]] en cours d’acquisition</div></div>
+      </div>
+
+      <!-- 6 étapes : garder grid-template-columns: repeat(6, 1fr) ; sinon l'ajuster en style. -->
+      <div class="chrono">
+        <div class="etape cle"><div class="pt"></div><div class="h">[[12h00]]</div><div class="q">[[Déclenchement]]</div></div>
+        <div class="etape"><div class="pt"></div><div class="h">[[12h01]]</div><div class="q">[[…]]</div></div>
+        <div class="etape"><div class="pt"></div><div class="h">[[12h03]]</div><div class="q">[[…]]</div></div>
+        <div class="etape"><div class="pt"></div><div class="h">[[12h04]]</div><div class="q">[[…]]</div></div>
+        <div class="etape"><div class="pt"></div><div class="h">[[12h06]]</div><div class="q">[[…]]</div></div>
+        <div class="etape cle"><div class="pt"></div><div class="h">[[12h08]]</div><div class="q">Fin de l’exercice</div></div>
+      </div>
+
+      <div class="bilan">
+        <div class="carte" style="--t:var(--ok)">
+          <h3><i data-ic="coche"></i> Ce qui a fonctionné</h3>
+          <ul>
+            <li><b>[[Point fort]]</b> [[précision]]</li>
+            <li><b>[[Point fort]]</b></li>
+            <li><b>[[Point fort]]</b></li>
+          </ul>
+        </div>
+        <div class="carte" style="--t:var(--prog)">
+          <h3><i data-ic="loupe"></i> Nos axes de progrès</h3>
+          <ul>
+            <li><b>[[Axe]]</b> [[précision]]</li>
+            <li><b>[[Axe]]</b></li>
+          </ul>
+        </div>
+        <div class="carte" style="--t:var(--acc)">
+          <h3><i data-ic="fusee"></i> Nos prochaines étapes</h3>
+          <ul>
+            <li><b>[[Action]]</b> [[précision]]</li>
+            <li><b>Partager ce retour</b> d’expérience à toutes les équipes</li>
+            <li><b>Rejouer l’exercice</b>, [[à l’improviste]]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pied">
+    <div class="med"><i data-ic="bouclier"></i></div>
+    <div class="msg">[[La leçon en une phrase.]]
+      <span>[[Geste · Geste · Geste · Jamais …]]</span></div>
+    <div class="legal" id="legal"></div>
+  </footer>
+
+</div>
+<script src="socle/js/icones.js"></script>
+<script src="socle/js/logo-b64.js"></script>
+<script src="socle/js/agence.js"></script>
+<script>
+  (function () {
+    var a = window.SAMSIC_AGENCE || {};
+    document.getElementById('legal').innerHTML = (a.provenance || 'SAMSIC SÉCURITÉ') + '<br>' +
+      'Agrément CNAPS : ' + (a.agrements || []).join(' · ') + '<br>' +
+      'Art. L612-14 CSI : l’autorisation d’exercice ne confère aucune prérogative de puissance publique.';
+  })();
+</script>
+<script src="socle/js/procedure.js"></script>
+</body>
+</html>

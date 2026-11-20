@@ -1,0 +1,564 @@
+/* ============================================================================
+   mase.css — Classeur MASE de site (chargé après procedure.css et rex.css)
+
+   Le classeur vit au poste de sécurité. Il a deux lecteurs :
+     - l'agent, qui doit y trouver en dix secondes ce qu'il doit faire ;
+     - l'auditeur MASE, qui doit y trouver la preuve que c'est fait.
+   D'où les deux familles de composants ci-dessous : des pages « à lire »
+   (mêmes cartes que les consignes) et des pages « à remplir » (registres,
+   fiches, émargements), toujours datées et signées.
+
+   Deux couleurs seulement : le marine et le bleu ciel SAMSIC (cf. procedure.js,
+   famille « mase »). Les nuances viennent de color-mix, jamais d'une 3e teinte.
+   ========================================================================== */
+
+body[data-famille="mase"] .lv-suite { display: none; }
+body[data-famille="mase"] .fr-titre { font-size: 30px; }
+body[data-famille="mase"] .fr-soustitre { font-size: 17px; }
+
+.ms-txt { font-size: 10.6px; line-height: 1.55; color: #4A5C74; margin: 0 0 2mm; }
+.ms-txt b { color: #2b3641; }
+.ms-note { font-size: 8.8px; line-height: 1.45; color: #7d8894; font-style: italic; margin-top: 1.5mm; }
+.ms-note b { color: #4A5C74; font-style: normal; }
+
+/* ================================================================ Couverture */
+.ms-couv { flex: 1; display: flex; flex-direction: column; }
+.ms-couv-haut {
+  margin: -8mm -9mm 0; padding: 11mm 12mm 10mm;
+  background: linear-gradient(135deg, var(--dom) 0%, var(--dom-fonce) 100%);
+  color: #fff; position: relative; overflow: hidden;
+}
+.ms-couv-haut::after {           /* le « S » du logo, en filigrane */
+  content: ''; position: absolute; right: -18mm; top: -10mm;
+  width: 90mm; height: 90mm; border-radius: 50%;
+  border: 14mm solid rgba(255, 255, 255, .05);
+}
+.ms-couv-logo { height: 22mm; display: block; margin-bottom: 10mm; }
+.ms-couv-sur {
+  font-size: 10px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: #6FC1EA;
+}
+.ms-couv-titre {
+  font-family: var(--font-titre); font-size: 64px; font-weight: 800; line-height: .92;
+  letter-spacing: -2.5px; text-transform: uppercase; margin: 3mm 0 4mm;
+}
+.ms-couv-titre span { color: #6FC1EA; }
+.ms-couv-sse { display: flex; gap: 3mm; flex-wrap: wrap; }
+.ms-couv-sse span {
+  display: inline-flex; align-items: center; gap: 2mm;
+  padding: 1.5mm 4mm; border-radius: 20px; border: 1.3px solid rgba(255, 255, 255, .35);
+  font-family: var(--font-titre); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+}
+.ms-couv-sse svg { width: 4.2mm; height: 4.2mm; color: #6FC1EA; }
+
+.ms-couv-site {
+  margin: 7mm 0 0; padding: 5mm 6mm; background: #fff; border-radius: 3mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .08); border-left: 5px solid var(--acc);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4mm 8mm;
+}
+.ms-couv-site .plein { grid-column: 1 / -1; }
+.ms-lab {
+  font-size: 8px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--acc);
+  margin-bottom: 1.5mm;
+}
+.ms-ligne { border-bottom: 1.3px solid #9aa5b1; height: 7mm; }
+.ms-ligne.grand { height: 10mm; }
+
+.ms-couv-regle {
+  margin-top: 7mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm;
+}
+.ms-couv-regle > div {
+  background: #fff; border-radius: 3mm; padding: 3.5mm 4mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07); border-top: 3px solid var(--t, var(--dom));
+  font-size: 10px; line-height: 1.45; color: #4A5C74;
+}
+.ms-couv-regle b.titre {
+  display: flex; align-items: center; gap: 2mm; margin-bottom: 1mm;
+  font-family: var(--font-titre); font-size: 12px; font-weight: 800; text-transform: uppercase;
+  color: var(--t, var(--dom));
+}
+.ms-couv-regle svg { width: 4.6mm; height: 4.6mm; }
+
+/* ================================================================ Intercalaire */
+/* Une page par onglet : le gros numéro se lit classeur ouvert à un mètre, et
+   la languette au bord droit descend d'un cran à chaque onglet, comme un
+   jeu d'intercalaires à onglets décalés. */
+.ms-inter { flex: 1; display: flex; flex-direction: column; padding-right: 14mm; }
+.ms-inter-tete {
+  display: flex; align-items: center; gap: 4mm;
+  font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #8b96a2;
+}
+.ms-inter-tete img { height: 11mm; border-radius: 1.5mm; }
+.ms-inter-num {
+  font-family: var(--font-titre); font-size: 150px; font-weight: 800; line-height: .8;
+  letter-spacing: -8px; color: var(--dom); margin: 16mm 0 3mm;
+}
+.ms-inter-num span { color: var(--acc); }
+.ms-inter-titre {
+  font-family: var(--font-titre); font-size: 40px; font-weight: 800; line-height: 1;
+  letter-spacing: -1.5px; text-transform: uppercase; color: var(--dom); margin: 0;
+}
+.ms-inter-axe {
+  display: inline-flex; align-self: flex-start; align-items: center; gap: 2mm; margin-top: 4mm;
+  padding: 1.4mm 4mm; border-radius: 20px; background: color-mix(in srgb, var(--acc) 10%, #fff);
+  color: var(--acc); font-family: var(--font-titre); font-size: 10.5px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.ms-inter-axe svg { width: 4mm; height: 4mm; }
+.ms-inter-pitch {
+  margin: 6mm 0 0; font-size: 13px; line-height: 1.5; color: #4A5C74; max-width: 150mm;
+}
+.ms-inter-pitch b { color: var(--dom); }
+.ms-inter-cols { display: grid; grid-template-columns: 1.15fr 1fr; gap: 4mm; margin-top: 9mm; }
+.ms-bloc {
+  background: #fff; border-radius: 3mm; padding: 4mm 5mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07); border-top: 3px solid var(--t, var(--dom));
+}
+.ms-bloc h3 {
+  margin: 0 0 2.5mm; display: flex; align-items: center; gap: 2mm;
+  font-family: var(--font-titre); font-size: 12px; font-weight: 800; text-transform: uppercase;
+  color: var(--t, var(--dom));
+}
+.ms-bloc h3 svg { width: 4.6mm; height: 4.6mm; }
+
+/* Contenu de l'onglet : chaque pièce avec son usage. */
+.ms-contenu { list-style: none; margin: 0; padding: 0; counter-reset: ms; }
+.ms-contenu li {
+  counter-increment: ms; position: relative; padding: 1.8mm 0 1.8mm 8mm;
+  border-bottom: 1px dashed #E4E9EE; font-size: 10.6px; line-height: 1.35; color: #2b3641;
+}
+.ms-contenu li:last-child { border-bottom: none; }
+.ms-contenu li::before {
+  content: counter(ms); position: absolute; left: 0; top: 1.9mm;
+  width: 5mm; height: 5mm; border-radius: 50%; background: var(--dom); color: #fff;
+  font-family: var(--font-titre); font-size: 9px; font-weight: 800; display: grid; place-items: center;
+}
+.ms-contenu li b { color: var(--dom); }
+.ms-usage {
+  display: inline-block; margin-left: 1.5mm; padding: 0 2mm; border-radius: 20px;
+  font-size: 7.6px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--acc); border: 1px solid color-mix(in srgb, var(--acc) 40%, #fff); vertical-align: 1px;
+}
+.ms-usage.remplir { background: var(--acc); color: #fff; border-color: var(--acc); }
+.ms-usage.inserer { background: var(--dom); color: #fff; border-color: var(--dom); }
+
+/* Nos essentiels : une puce, pas de numéro de référentiel (sans valeur pour l'agent). */
+.ms-audit { list-style: none; margin: 0; padding: 0; }
+.ms-audit li {
+  position: relative; padding: 1.4mm 0 1.4mm 5mm;
+  font-size: 10px; line-height: 1.4; color: #4A5C74;
+}
+.ms-audit li::before {
+  content: ""; position: absolute; left: .6mm; top: 2.75mm;
+  width: 2mm; height: 2mm; border-radius: 50%; background: var(--acc);
+}
+
+/* Les neuf onglets en fantôme le long du bord, celui de la page en plein.
+   Pas de 26 mm : le 9e s'arrête avant le pied de page. */
+.ms-languettes {
+  position: absolute; right: 0; top: 10mm; width: 3.5mm; height: calc(9 * 26mm);
+  background: repeating-linear-gradient(180deg,
+    color-mix(in srgb, var(--dom) 12%, #fff) 0 24mm, transparent 24mm 26mm);
+}
+.ms-languette {
+  position: absolute; right: 0; width: 13mm; height: 24mm;
+  top: calc((var(--n) - 1) * 26mm);
+  background: var(--dom); color: #fff; border-radius: 2.5mm 0 0 2.5mm;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-titre); font-size: 22px; font-weight: 800;
+}
+
+/* ================================================================ Sommaire */
+.ms-sommaire { display: flex; flex-direction: column; gap: 1.8mm; }
+.ms-sommaire > div {
+  display: flex; align-items: center; gap: 4mm;
+  background: #fff; border-radius: 3mm; padding: 2.2mm 4mm 2.2mm 2.2mm;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .07);
+}
+.ms-som-num {
+  flex: 0 0 11mm; height: 11mm; border-radius: 2.2mm; background: var(--dom); color: #fff;
+  display: grid; place-items: center; font-family: var(--font-titre); font-size: 17px; font-weight: 800;
+}
+.ms-sommaire > div:nth-child(even) .ms-som-num { background: var(--acc); }
+.ms-som-txt { flex: 1; min-width: 0; }
+.ms-som-titre { font-family: var(--font-titre); font-size: 12.5px; font-weight: 800; text-transform: uppercase; color: var(--dom); }
+.ms-som-desc { font-size: 9.6px; line-height: 1.35; color: #6b7785; }
+.ms-som-axe {
+  flex: 0 0 auto; font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--acc); text-align: right; line-height: 1.3;
+}
+
+/* ================================================================ Les 5 axes */
+.ms-axes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2mm; position: relative; }
+.ms-axes::before {
+  content: ''; position: absolute; left: 8%; right: 8%; top: 6mm; height: 2px;
+  background: color-mix(in srgb, var(--acc) 40%, #fff);
+}
+.ms-axe { position: relative; text-align: center; }
+.ms-axe-num {
+  width: 12mm; height: 12mm; margin: 0 auto 2mm; border-radius: 50%;
+  background: var(--dom); color: #fff; border: 2.5px solid #fff; box-shadow: 0 0 0 1.5px var(--dom);
+  display: grid; place-items: center; font-family: var(--font-titre); font-size: 18px; font-weight: 800;
+}
+.ms-axe:nth-child(even) .ms-axe-num { background: var(--acc); box-shadow: 0 0 0 1.5px var(--acc); }
+.ms-axe-titre {
+  font-family: var(--font-titre); font-size: 10.5px; font-weight: 800; line-height: 1.15;
+  text-transform: uppercase; color: var(--dom); min-height: 7mm;
+}
+.ms-axe-txt { font-size: 9.2px; line-height: 1.4; color: #6b7785; margin-top: 1mm; }
+
+/* ============================================================ Chiffres clés */
+.ms-chiffres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm; }
+.ms-chiffres > div {
+  background: #fff; border-radius: 3mm; padding: 3mm; text-align: center;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07);
+}
+.ms-chiffres b {
+  display: block; font-family: var(--font-titre); font-size: 26px; font-weight: 800; line-height: 1;
+  color: var(--dom); letter-spacing: -1px;
+}
+.ms-chiffres > div:nth-child(even) b { color: var(--acc); }
+.ms-chiffres span { display: block; font-size: 9.2px; line-height: 1.35; color: #6b7785; margin-top: 1.2mm; }
+
+/* =============================================== Registres et fiches à remplir */
+/* Base : .rx-table (rex.css). Les lignes vides ont la hauteur d'une écriture
+   au stylo ; la première colonne n'est plus en gras puisqu'elle sera écrite. */
+.ms-registre td { height: 7.6mm; padding-top: 0; padding-bottom: 0; }
+.ms-registre.haut td { height: 10.5mm; }
+.ms-registre td:first-child { font-weight: 400; color: #2b3641; }
+.ms-registre tr:nth-child(even) td { background: #fff; }
+.ms-registre td + td { border-left: 1px solid #E9EDF1; }
+.ms-registre th { font-size: 8.4px; padding: 1.8mm 2mm; line-height: 1.2; }
+.ms-registre .pre td { height: auto; padding: 1.6mm 2mm; font-size: 9.4px; }
+.ms-registre .pre td:first-child { font-weight: 700; color: var(--dom); }
+
+/* Tableau d'objectifs : libellé imprimé, valeurs à écrire. */
+.ms-objectifs td { height: 8.5mm; padding-top: 1mm; padding-bottom: 1mm; vertical-align: middle; }
+.ms-objectifs td:first-child { font-weight: 700; }
+.ms-objectifs td small { display: block; font-weight: 400; color: #7d8894; font-size: 8.4px; }
+.ms-objectifs td + td { border-left: 1px solid #E9EDF1; }
+
+/* Formulaire « au stylo » : champs étiquetés sur une grille. */
+.ms-form {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm 4mm;
+  background: #fff; border-radius: 3mm; padding: 4mm 5mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07); border-left: 4px solid var(--dom);
+  break-inside: avoid;
+}
+.ms-form .d2 { grid-column: span 2; }
+.ms-form .d3 { grid-column: span 3; }
+.ms-form .plein { grid-column: 1 / -1; }
+.ms-zone { border: 1.3px dashed #B8C2CC; border-radius: 2mm; background: #FCFDFE; }
+.ms-cases { display: flex; flex-wrap: wrap; gap: 1.5mm 5mm; font-size: 10.4px; color: #2b3641; padding-top: .5mm; }
+.ms-case { display: inline-flex; align-items: center; gap: 1.8mm; }
+.ms-case::before {
+  content: ''; width: 3.8mm; height: 3.8mm; border: 1.5px solid var(--dom); border-radius: .9mm; background: #fff;
+  box-sizing: border-box;
+}
+.ms-case b { color: var(--dom); }
+
+/* Bloc de signatures, en bas d'une fiche. */
+.ms-signatures { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 3mm; margin-top: 3mm; break-inside: avoid; }
+.ms-signatures > div {
+  background: #fff; border-radius: 3mm; padding: 2.5mm 3.5mm; height: 24mm; box-sizing: border-box;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07); border-top: 3px solid var(--acc);
+}
+.ms-signatures.bas > div { height: 19mm; }
+.ms-signatures small { display: block; font-size: 8.4px; color: #7d8894; margin-top: .5mm; }
+
+/* =================================================== Document à insérer ici */
+/* Les pièces qui ne s'impriment pas d'ici (politique signée, PDP, DUER) ont
+   leur page « réservée » : l'auditeur voit ce qui doit s'y trouver, l'agent
+   voit si c'est à jour. */
+.ms-inserer {
+  border: 2px dashed color-mix(in srgb, var(--dom) 30%, #fff); border-radius: 4mm;
+  padding: 6mm 7mm; background: #fff; display: flex; gap: 6mm; align-items: flex-start;
+  break-inside: avoid;
+}
+.ms-inserer-ic {
+  flex: 0 0 16mm; height: 16mm; border-radius: 50%; background: var(--dom); color: #fff;
+  display: grid; place-items: center;
+}
+.ms-inserer-ic svg { width: 8mm; height: 8mm; }
+.ms-inserer h3 {
+  margin: 0 0 1.5mm; font-family: var(--font-titre); font-size: 17px; font-weight: 800;
+  text-transform: uppercase; color: var(--dom);
+}
+.ms-inserer p { margin: 0 0 2mm; font-size: 10.6px; line-height: 1.5; color: #4A5C74; }
+.ms-inserer-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-top: 3mm; }
+.ms-inserer-meta > div { font-size: 10px; color: #2b3641; line-height: 1.4; }
+
+/* ========================================================== Cartes de risque */
+.ms-risques { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+.ms-risque {
+  background: #fff; border-radius: 3mm; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .08); break-inside: avoid;
+  display: flex; flex-direction: column;
+}
+.ms-risque-tete {
+  display: flex; align-items: center; gap: 2.5mm; padding: 2.2mm 3.5mm;
+  background: var(--t, var(--dom)); color: #fff;
+}
+.ms-risque-tete svg { width: 5.4mm; height: 5.4mm; flex: 0 0 auto; }
+.ms-risque-titre { font-family: var(--font-titre); font-size: 12px; font-weight: 800; text-transform: uppercase; line-height: 1.1; flex: 1; }
+.ms-sse {
+  flex: 0 0 auto; font-size: 7.4px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  padding: .4mm 1.8mm; border-radius: 20px; background: rgba(255, 255, 255, .18);
+}
+.ms-risque-corps { padding: 2.6mm 3.5mm 3mm; font-size: 10px; line-height: 1.45; color: #4A5C74; flex: 1; display: flex; flex-direction: column; }
+.ms-risque-corps ul { flex: 1; }
+.ms-code {
+  float: right; margin: 0 0 .5mm 2mm; padding: 0 1.6mm; border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--acc) 45%, #fff); color: var(--acc);
+  font-style: normal; font-size: 7.2px; font-weight: 800; letter-spacing: .06em;
+}
+.ms-risque-corps .si {
+  margin-top: 1.8mm; padding: 1.6mm 2.5mm; border-radius: 1.8mm;
+  background: color-mix(in srgb, var(--t, var(--dom)) 8%, #fff); color: #2b3641; font-size: 9.6px;
+}
+.ms-risque-corps .si > b:first-child {
+  display: block; font-size: 7.6px; letter-spacing: .1em; text-transform: uppercase; color: var(--t, var(--dom));
+}
+.ms-risque-corps .quand { color: #6b7785; font-style: italic; margin-bottom: 1.2mm; }
+.ms-risque-corps ul { margin: 0; padding-left: 3.6mm; }
+.ms-risque-corps li { margin-bottom: .5mm; }
+.ms-risque-corps li b { color: #2b3641; }
+
+/* ================================================================ Quiz */
+.ms-quiz { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+.ms-quiz > div {
+  background: #fff; border-radius: 3mm; padding: 2.6mm 3.5mm;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .07); break-inside: avoid;
+}
+.ms-quiz-q {
+  display: flex; gap: 2mm; font-size: 10.3px; line-height: 1.35; font-weight: 700; color: #2b3641; margin-bottom: 1.6mm;
+}
+.ms-quiz-q span {
+  flex: 0 0 5.4mm; height: 5.4mm; border-radius: 50%; background: var(--dom); color: #fff;
+  display: grid; place-items: center; font-family: var(--font-titre); font-size: 9.5px; font-weight: 800;
+}
+.ms-quiz .ms-cases { flex-direction: column; gap: 1mm; font-size: 9.8px; padding-left: 7.4mm; }
+.ms-corrige {
+  margin-top: 2.5mm; padding: 2mm 4mm; border-radius: 2.5mm; background: color-mix(in srgb, var(--dom) 5%, #fff);
+  font-size: 8.6px; color: #6b7785; transform: rotate(180deg); text-align: center;
+}
+.ms-corrige b { color: var(--dom); }
+.ms-score {
+  display: flex; align-items: center; gap: 4mm; margin-top: 2.5mm;
+  background: var(--dom); color: #fff; border-radius: 3mm; padding: 3mm 5mm;
+  font-size: 10.4px; line-height: 1.4;
+}
+.ms-score-box {
+  flex: 0 0 auto; width: 26mm; height: 13mm; border-radius: 2mm; background: #fff; color: var(--dom);
+  display: flex; align-items: flex-end; justify-content: flex-end; padding: 0 2.5mm 1.5mm;
+  font-family: var(--font-titre); font-size: 16px; font-weight: 800; box-sizing: border-box;
+}
+
+/* ============================================== Questions de l'auditeur */
+.ms-questions { display: flex; flex-direction: column; gap: 2.4mm; }
+.ms-questions > div {
+  display: grid; grid-template-columns: 7mm 1fr 1.05fr; gap: 3mm; align-items: center;
+  background: #fff; border-radius: 3mm; padding: 3.2mm 3.5mm 3.2mm 2.5mm;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .07);
+}
+.ms-questions .n {
+  width: 7mm; height: 7mm; border-radius: 50%; background: var(--acc); color: #fff;
+  display: grid; place-items: center; font-family: var(--font-titre); font-size: 11px; font-weight: 800;
+}
+.ms-questions .q { font-family: var(--font-titre); font-size: 11.4px; font-weight: 800; line-height: 1.2; color: var(--dom); }
+.ms-questions .r { font-size: 9.6px; line-height: 1.4; color: #4A5C74; border-left: 2px solid color-mix(in srgb, var(--acc) 35%, #fff); padding-left: 3mm; }
+.ms-questions .r b { color: #2b3641; }
+.ms-renvoi {
+  display: inline-block; padding: 0 1.8mm; border-radius: 20px; background: var(--dom); color: #fff;
+  font-size: 7.6px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; vertical-align: 1px;
+}
+
+/* ================================================== Correspondance référentiel */
+.ms-corresp td { font-size: 9.4px; padding: 1.4mm 2.5mm; }
+.ms-corresp td:first-child { width: 12%; }
+.ms-corresp td:nth-child(3) { width: 16%; text-align: center; }
+.ms-corresp tr.axe td {
+  background: color-mix(in srgb, var(--acc) 10%, #fff) !important;
+  font-family: var(--font-titre); font-weight: 800; text-transform: uppercase; color: var(--dom); font-size: 9.6px;
+}
+
+/* ============================================== Grille d'audit terrain */
+.ms-grille td { height: 6.4mm; padding-top: .6mm; padding-bottom: .8mm; vertical-align: middle; font-size: 9.6px; }
+.ms-grille td:first-child { font-weight: 400; color: #2b3641; }
+.ms-grille td.dom { text-align: center; font-size: 7.6px; font-weight: 800; letter-spacing: .06em; color: var(--acc); }
+.ms-grille td.c { width: 7mm; }
+.ms-grille th.c { text-align: center; padding-left: 0; padding-right: 0; }
+.ms-grille tr.axe td {
+  height: auto; padding: 1.4mm 3mm; background: color-mix(in srgb, var(--acc) 10%, #fff) !important;
+  font-family: var(--font-titre); font-weight: 800; text-transform: uppercase; color: var(--dom); font-size: 9.4px;
+}
+.ms-grille td + td { border-left: 1px solid #E9EDF1; }
+
+/* =============================================== Matrice des habilitations */
+.ms-matrice th.v { height: 30mm; vertical-align: bottom; padding: 1.5mm 0; width: 9.5mm; }
+.ms-matrice th.v span {
+  display: block; writing-mode: vertical-rl; transform: rotate(180deg);
+  margin: 0 auto; white-space: nowrap; font-size: 8.4px;
+}
+.ms-matrice td { height: 8.2mm; font-size: 9.6px; vertical-align: middle; }
+.ms-matrice td:first-child b { color: var(--dom); }
+.ms-matrice td:nth-child(2), .ms-matrice td:nth-child(3) { text-align: center; font-size: 8.6px; padding-left: 0; padding-right: 0; }
+/* Carte pro échue : aplat ; à moins de trois mois : entourée, comme on le ferait au stylo. */
+.ms-matrice td.echu { background: var(--dom) !important; color: #fff; font-weight: 800; }
+.ms-matrice td.bientot { box-shadow: inset 0 0 0 1.6px var(--acc); color: var(--acc); font-weight: 800; }
+
+/* Extraits de sam-agence : lignes de registre et indicateurs pré-remplis. */
+.ms-registre tr.rempli td { height: auto; min-height: 7.6mm; padding: 1.2mm 2mm; font-size: 8.6px; line-height: 1.3; vertical-align: middle; }
+.ms-registre tr.rempli td:first-child { font-weight: 700; color: var(--dom); }
+.ms-suivi tr.rempli td:nth-child(3), .ms-suivi tr.rempli td:nth-child(5) { font-weight: 700; color: var(--dom); text-align: center; }
+.ms-objectifs td.rempli { font-family: var(--font-titre); font-weight: 800; color: var(--dom); font-size: 9.6px; }
+.ms-ligne.alerte { color: var(--acc); box-shadow: inset 0 -2px 0 var(--acc); }
+
+/* Valeur pré-remplie à la place d'une ligne à écrire. */
+.ms-ligne:not(:empty) {
+  display: flex; align-items: flex-end; padding-bottom: .8mm; box-sizing: border-box;
+  font-family: var(--font-titre); font-size: 12px; font-weight: 800; color: var(--dom);
+}
+.ms-ligne.grand:not(:empty) { font-size: 20px; letter-spacing: -.4px; }
+
+/* ============================================== Extrait du DUERP */
+.ms-duerp { font-size: 9px; line-height: 1.35; }
+.ms-duerp th { font-size: 8px; padding: 1.4mm 1.8mm; }
+.ms-duerp td { padding: 1mm 1.8mm; vertical-align: middle; }
+.ms-duerp td:first-child { font-size: 8.8px; }
+.ms-duerp tr.suite td { border-top: none; }
+.ms-duerp tr.suite td:first-child { background: inherit; }
+.ms-duerp .n { width: 5%; text-align: center; padding-left: 0; padding-right: 0; }
+.ms-duerp .rx-niv { font-size: 7px; padding: .2mm 1.6mm; white-space: nowrap; }
+.ms-duerp tr:nth-child(even) td { background: #fff; }
+.ms-duerp tr:not(.suite):not(:first-child) td { border-top: 1px solid #DCE3EA; }
+
+/* Échelles de cotation du DUERP. */
+.ms-echelles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.2mm; }
+.ms-echelle { background: #fff; border-radius: 3mm; overflow: hidden; box-shadow: 0 1px 3px rgba(34, 52, 74, .08); }
+.ms-echelle h4 {
+  margin: 0; padding: 1.8mm 3mm; background: var(--t, var(--dom)); color: #fff;
+  font-family: var(--font-titre); font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+}
+.ms-echelle ol { list-style: none; margin: 0; padding: 1.5mm 3mm 2mm; }
+.ms-echelle li { display: flex; gap: 2mm; padding: 1mm 0; font-size: 8.8px; line-height: 1.3; color: #4A5C74; border-bottom: 1px dashed #E4E9EE; }
+.ms-echelle li:last-child { border-bottom: none; }
+.ms-echelle li b { flex: 0 0 6mm; font-family: var(--font-titre); color: var(--t, var(--dom)); font-size: 10px; }
+.ms-formule {
+  display: flex; align-items: center; justify-content: center; gap: 3mm; flex-wrap: wrap;
+  background: var(--dom); color: #fff; border-radius: 3mm; padding: 3.5mm 5mm;
+  font-family: var(--font-titre); font-size: 14px; font-weight: 800;
+}
+.ms-formule span { padding: .8mm 3mm; border-radius: 2mm; background: rgba(255, 255, 255, .12); }
+.ms-formule em { font-style: normal; color: #6FC1EA; }
+
+/* ============================================ Grille de cotation des événements */
+.ms-cotation { display: grid; grid-template-columns: 22mm repeat(4, 1fr); gap: 1.2mm; font-size: 9px; }
+.ms-cotation > div {
+  border-radius: 1.6mm; padding: 1.8mm 1.5mm; text-align: center; line-height: 1.25;
+  display: flex; align-items: center; justify-content: center; min-height: 9mm;
+}
+.ms-cotation > div { min-height: 12mm; font-size: 11px; }
+.ms-cotation .lab { background: #fff; color: #4A5C74; font-weight: 700; box-shadow: 0 1px 2px rgba(34, 52, 74, .08); flex-direction: column; font-size: 9.4px; }
+.ms-cotation .lab small { display: block; font-weight: 400; color: #8b96a2; font-size: 8.4px; }
+.ms-cotation .coin {
+  flex-direction: column; align-items: flex-end; justify-content: space-between; padding: 1mm;
+  font-size: 7.6px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--acc);
+}
+.ms-legende { display: flex; gap: 4mm; margin-top: 2mm; font-size: 9.4px; color: #4A5C74; }
+.ms-legende span { display: inline-flex; align-items: center; gap: 1.8mm; }
+.ms-legende i { width: 4.5mm; height: 3.2mm; border-radius: .8mm; display: inline-block; }
+.ms-cotation .c1 { background: color-mix(in srgb, var(--acc) 10%, #fff); color: var(--dom); }
+.ms-cotation .c2 { background: color-mix(in srgb, var(--acc) 30%, #fff); color: var(--dom); }
+.ms-cotation .c3 { background: color-mix(in srgb, var(--dom) 70%, #fff); color: #fff; font-weight: 700; }
+.ms-cotation .c4 { background: var(--dom); color: #fff; font-weight: 800; }
+.ms-cotation .coin { background: transparent; }
+
+/* ================================================ Les 5 pourquoi */
+.ms-5p { display: flex; flex-direction: column; gap: 1.3mm; }
+.ms-5p > div { display: grid; grid-template-columns: 26mm 1fr; align-items: center; gap: 3mm; }
+.ms-5p .p {
+  text-align: right; font-family: var(--font-titre); font-size: 9.5px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--acc);
+}
+.ms-5p .r {
+  background: #fff; border-radius: 2.5mm; padding: 1.8mm 3.5mm; border-left: 3px solid var(--acc);
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .07); font-size: 10.2px; line-height: 1.4; color: #2b3641;
+}
+.ms-5p .fond .p { color: var(--dom); }
+.ms-5p .fond .r { background: var(--dom); color: #fff; border-left-color: var(--dom); }
+.ms-5p .fond .r b { color: #6FC1EA; }
+
+/* ================================================ Calendrier des causeries */
+.ms-annee { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2mm; }
+.ms-annee.etire { flex: 8; grid-auto-rows: 1fr; }
+.ms-annee.etire .ms-mois-corps { padding: 2.6mm 3.2mm 3mm; }
+.ms-annee.etire .ms-mois-theme { font-size: 12.4px; }
+.ms-annee.etire .ms-mois-txt { font-size: 9.6px; line-height: 1.45; margin-top: 1.2mm; }
+.ms-mois {
+  background: #fff; border-radius: 3mm; overflow: hidden; box-shadow: 0 1px 3px rgba(34, 52, 74, .08);
+  display: flex; flex-direction: column;
+}
+.ms-mois-tete {
+  display: flex; align-items: center; justify-content: space-between; padding: 1.6mm 3mm;
+  background: var(--t, var(--dom)); color: #fff;
+  font-family: var(--font-titre); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+}
+.ms-mois-tete svg { width: 4.2mm; height: 4.2mm; opacity: .9; }
+.ms-mois-corps { padding: 2mm 3mm 2.4mm; flex: 1; display: flex; flex-direction: column; }
+.ms-mois-dom { font-size: 7.4px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); margin-bottom: .6mm; }
+.ms-suivi .pre td { height: 9.6mm; }
+.ms-mois-theme { font-family: var(--font-titre); font-size: 11px; font-weight: 800; line-height: 1.15; color: var(--dom); }
+.ms-mois-txt { font-size: 8.8px; line-height: 1.35; color: #6b7785; margin-top: .8mm; flex: 1; }
+.ms-mois-fait { display: flex; gap: 2mm; margin-top: 1.6mm; font-size: 7.6px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #9aa5b1; }
+.ms-mois-fait span { flex: 1; border-bottom: 1px solid #C5CDD5; padding-bottom: 2.5mm; }
+
+/* Cycle (REX, causerie) : étapes en ligne reliées par une flèche. */
+.ms-cycle { display: grid; grid-template-columns: repeat(var(--n, 5), 1fr); gap: 2mm; }
+.ms-cycle > div {
+  position: relative; background: #fff; border-radius: 3mm; padding: 3mm 2.5mm; text-align: center;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .08); border-top: 3px solid var(--t, var(--dom));
+}
+.ms-cycle > div:not(:last-child)::after {
+  content: ''; position: absolute; right: -2.2mm; top: 50%; transform: translateY(-50%);
+  border: 1.4mm solid transparent; border-left: 1.8mm solid var(--acc); z-index: 1;
+}
+.ms-cycle .ic { width: 9mm; height: 9mm; margin: 0 auto 1.5mm; border-radius: 50%; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--t, var(--dom)) 10%, #fff); color: var(--t, var(--dom)); }
+.ms-cycle .ic svg { width: 5mm; height: 5mm; }
+.ms-cycle b { display: block; font-family: var(--font-titre); font-size: 10.6px; font-weight: 800; text-transform: uppercase; color: var(--t, var(--dom)); line-height: 1.15; }
+.ms-cycle span { display: block; font-size: 8.8px; line-height: 1.35; color: #6b7785; margin-top: 1mm; }
+
+/* Organigramme SSE : rôle imprimé, nom et téléphone à écrire. */
+.ms-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm; }
+.ms-role {
+  display: flex; gap: 3mm; align-items: flex-start; background: #fff; border-radius: 3mm; padding: 2.6mm 3.5mm;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .07); border-left: 4px solid var(--t, var(--dom));
+}
+.ms-role .pr-tuile-ic { --t: var(--t, var(--dom)); }
+.ms-role-corps { flex: 1; min-width: 0; }
+.ms-role-titre { font-family: var(--font-titre); font-size: 11.4px; font-weight: 800; text-transform: uppercase; color: var(--t, var(--dom)); line-height: 1.15; }
+.ms-role-txt { font-size: 9.2px; line-height: 1.38; color: #6b7785; margin: .6mm 0 1.4mm; }
+.ms-role-champs { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3mm; font-size: 7.6px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #9aa5b1; }
+.ms-role-champs span { border-bottom: 1px solid #B8C2CC; padding-bottom: 4mm; }
+
+.ms-role-champs span.v {
+  padding-bottom: .8mm; color: #2b3641; font-size: 9.8px; font-weight: 700;
+  letter-spacing: 0; text-transform: none;
+}
+
+/* La politique SSE signée, reproduite telle quelle. */
+.ms-politique { margin: 4mm 0 0; text-align: center; }
+.ms-politique img {
+  height: 206mm; width: auto; border-radius: 2mm;
+  box-shadow: 0 1px 6px rgba(34, 52, 74, .2);
+}
+
+/* Numéros d'urgence : gros chiffres. */
+.ms-urgences { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm; }
+.ms-urgences > div {
+  border-radius: 3mm; padding: 3mm; text-align: center; background: var(--t, var(--dom)); color: #fff;
+}
+.ms-urgences b { display: block; font-family: var(--font-titre); font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+.ms-urgences span { display: block; font-size: 9px; line-height: 1.3; margin-top: 1mm; opacity: .9; }
+.ms-urgences .vide { background: #fff; color: var(--dom); border: 1.5px dashed color-mix(in srgb, var(--dom) 40%, #fff); }
+.ms-urgences .vide b { height: 9mm; border-bottom: 1.3px solid #9aa5b1; margin: 0 4mm; }

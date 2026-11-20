@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[[Titre de la consigne]]</title>
+<link rel="stylesheet" href="socle/css/fonts.css">
+<link rel="stylesheet" href="socle/css/doc.css">
+<link rel="stylesheet" href="socle/css/fiche-reflexe.css">
+<link rel="stylesheet" href="socle/css/procedure.css">
+</head>
+<!--
+  CONSIGNE AGENTS — deux pages A4 au plus (recto : le geste ; verso : le pourquoi).
+
+  data-famille  consigne  marine + bleu SAMSIC (consignes RH, prévention : par défaut)
+                incident  rouge (sûreté, incivilités, urgence)
+                exploitation / rh / sante / equipement : voir la fiche réflexe
+  data-libelle  (facultatif) remplace le nom de la famille dans le pied, ex. « Consignes RH »
+  data-site     (facultatif) nom du site, ajouté dans le pied
+-->
+<body data-famille="consigne" data-titre="[[Titre court, en message]]" data-maj="[[JJ/MM/AAAA]]">
+<div class="pr-doc fr-doc">
+
+  <!-- ============================================================ PAGE 1 : LE GESTE -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="[[La règle en une ligne, ex. 1 vacation cumulée = 1 vacation posée]]"
+        data-resume="[[Deux ou trois phrases : la règle, et ce que l'agent y gagne ou risque.]]"></header>
+
+      <div class="fr-declencheur">
+        <span class="fr-declencheur-lab">Quand ?</span>
+        <div class="fr-declencheur-txt">[[Le déclencheur, mots-clés en <b>gras</b>.]]</div>
+      </div>
+
+      <div class="fr-etapes">
+        <div class="fr-etape" style="--et:var(--et-1)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">1</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="loupe"></i></span><span>[[Impératif + objet]]</span></div>
+            <div class="fr-etape-desc">[[Le geste. <b>Le point qui compte</b> en gras.]]</div>
+          </div>
+          <div class="fr-etape-vignette"><i data-ic="loupe"></i></div>
+        </div>
+
+        <!-- Carte large avec liste à puces et gros chiffre (un numéro, un délai). -->
+        <div class="fr-etape pr-large" style="--et:var(--et-2)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">2</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="telephone"></i></span><span>[[Impératif + objet]]</span></div>
+            <div class="fr-etape-desc">[[Introduction de la liste :]]</div>
+            <ul class="pr-liste">
+              <li>[[premier élément ;]]</li>
+              <li>[[dernier élément.]]</li>
+            </ul>
+          </div>
+          <div class="pr-gros-num"><i data-ic="telephone"></i>[[17]]</div>
+        </div>
+
+        <!-- Variante date butoir : <div class="pr-date"><b>15</b><span>jours avant</span></div> -->
+        <!-- Variante QR code : <div class="pr-qr"><img src="img/qr.png" alt=""><span>Scanner</span></div> -->
+        <!-- Pastilles : <div class="pr-chips"><span class="pr-chip">Quoi</span>…</div> -->
+        <div class="fr-etape" style="--et:var(--et-3)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">3</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="horloge"></i></span><span>[[Impératif + objet]]</span></div>
+            <div class="fr-etape-desc">[[Description.]]</div>
+          </div>
+          <div class="fr-etape-vignette"><i data-ic="horloge"></i></div>
+        </div>
+
+        <div class="fr-etape" style="--et:var(--et-4)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">4</span></div>
+          <div class="fr-etape-txt">
+            <div class="fr-etape-titre"><span class="fr-etape-ic"><i data-ic="crayon"></i></span><span>[[Impératif + objet]]</span></div>
+            <div class="fr-etape-desc">[[Description. <b>Suite : voir au verso.</b>]]</div>
+          </div>
+          <div class="fr-etape-vignette"><i data-ic="crayon"></i></div>
+        </div>
+      </div>
+
+      <!-- Message fort : l'objection qu'on entend sur le terrain, ou la règle qui ne se discute pas. -->
+      <div class="pr-fort">
+        <span class="pr-fort-ic"><i data-ic="alerte"></i></span>
+        <div class="pr-fort-txt">
+          <b class="titre">[[« L'objection entendue sur le terrain »]]</b>
+          [[La réponse, en deux phrases. <b>La conclusion en gras.</b>]]
+        </div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ PAGE 2 : LE POURQUOI -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="[[Ce qu'il faut savoir en plus]]"></header>
+
+      <div class="pr-section"><i data-ic="loupe"></i> [[Bon à savoir]]</div>
+      <div class="pr-tuiles">
+        <div class="pr-tuile" style="--t:var(--et-1)">
+          <span class="pr-tuile-ic"><i data-ic="horloge"></i></span>
+          <div>
+            <div class="pr-tuile-titre">[[Question que se pose l'agent ?]]</div>
+            <div class="pr-tuile-txt">[[Réponse courte, chiffres en <b>gras</b>.]]</div>
+          </div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--et-2)">
+          <span class="pr-tuile-ic"><i data-ic="cible"></i></span>
+          <div>
+            <div class="pr-tuile-titre">[[Question ?]]</div>
+            <div class="pr-tuile-txt">[[Réponse.]]</div>
+          </div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--et-1)">
+          <span class="pr-tuile-ic"><i data-ic="alerte"></i></span>
+          <div>
+            <div class="pr-tuile-titre">[[Question ?]]</div>
+            <div class="pr-tuile-txt">[[Réponse.]]</div>
+          </div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--et-2)">
+          <span class="pr-tuile-ic"><i data-ic="personnes"></i></span>
+          <div>
+            <div class="pr-tuile-titre">[[Question ?]]</div>
+            <div class="pr-tuile-txt">[[Réponse.]]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pr-section"><i data-ic="coche"></i> Je vérifie</div>
+      <div class="pr-check">
+        <ul>
+          <li>[[Je … (geste vérifiable, à la 1re personne).]]</li>
+          <li>[[Je …]]</li>
+          <li>[[Je …]]</li>
+        </ul>
+      </div>
+
+      <!-- Textes de référence : accord d'entreprise, CCN IDCC 1351, Code du travail… -->
+      <div class="pr-refs"><i data-ic="document"></i><div><b>Références</b> : [[texte, date, articles]].</div></div>
+
+      <div class="pr-ressort"></div>
+      <div data-bandeau data-l1="[[Phrase-choc qui résume la consigne]]" data-l2="[[Le geste en une ligne]]"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+</div>
+<script src="socle/js/icones.js"></script>
+<script src="socle/js/logo-b64.js"></script>
+<script src="socle/js/agence.js"></script>
+<script src="socle/js/procedure.js"></script>
+</body>
+</html>

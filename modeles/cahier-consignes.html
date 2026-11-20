@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cahier de consignes · [[Site]]</title>
+<link rel="stylesheet" href="socle/css/fonts.css">
+<link rel="stylesheet" href="socle/css/doc.css">
+<link rel="stylesheet" href="socle/css/fiche-reflexe.css">
+<link rel="stylesheet" href="socle/css/procedure.css">
+<link rel="stylesheet" href="socle/css/rex.css">
+<link rel="stylesheet" href="socle/css/mase.css">
+<link rel="stylesheet" href="socle/css/consignes-site.css">
+</head>
+<!--
+  CAHIER DE CONSIGNES D'UN SITE — même visuel que le classeur SSE (famille « mase »).
+  Ordre : couverture · mode d'emploi (10 règles) · sommaire · puis pour chaque chapitre
+  un intercalaire (languette --n:N) et ses pages numérotées « N · Titre » ·
+  dernier chapitre « Suivi des consignes » : registre, prise en compte signée,
+  correspondance avec la consigne client.
+  Chapitres dans l'ordre d'une vacation (à adapter au site) :
+    1 Le site et qui appeler · 2 Prise et fin de poste · 3 Tenue, EPI et matériel ·
+    4 Les rondes · 5 Accès et stationnement · 6 Supervision et vidéo ·
+    7 Situations d'urgence · 8 Suivi des consignes
+  Modèles de page ci-dessous : à DUPLIQUER pour chaque page réelle.
+  Les codes (alarme, portail, coffre) ne s'impriment JAMAIS : <span class="cs-code">donné en formation</span>.
+-->
+<body data-famille="mase" data-doc="site" data-titre="Cahier de consignes"
+  data-libelle="Cahier de consignes · [[Site]]" data-maj="[[JJ/MM/AAAA]]">
+<div class="pr-doc fr-doc">
+
+  <!-- ============================================================ COUVERTURE -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <div class="ms-couv">
+        <div class="ms-couv-haut">
+          <img class="ms-couv-logo" data-logo alt="SAMSIC Sécurité">
+          <div class="ms-couv-sur">Consignes d’application SAMSIC · [[Gardiennage du site]]</div>
+          <div class="ms-couv-titre">Cahier de<br><span>consignes</span></div>
+          <div class="ms-couv-sse">
+            <span><i data-ic="batiment"></i> [[Client]]</span>
+            <span><i data-ic="flamme"></i> [[Type de site · Seveso]]</span>
+            <span><i data-ic="lune"></i> [[Nuits et week-ends]]</span>
+          </div>
+        </div>
+
+        <div class="ms-couv-site">
+          <div class="plein"><div class="ms-lab">Site</div><div class="ms-ligne grand">[[Nom complet du site]]</div></div>
+          <div><div class="ms-lab">Client</div><div class="ms-ligne">[[Raison sociale]]</div></div>
+          <div><div class="ms-lab">Consigne client de référence</div><div class="ms-ligne">[[Référence · version du JJ/MM/AAAA]]</div></div>
+          <div><div class="ms-lab">Adresse</div><div class="ms-ligne">[[Adresse]]</div></div>
+          <div><div class="ms-lab">Cahier mis en place le</div><div class="ms-ligne"></div></div>
+        </div>
+
+        <div class="ms-couv-regle">
+          <div style="--t:var(--dom)">
+            <b class="titre"><i data-ic="cadenas"></i> Il reste au poste</b>
+            Ce cahier ne quitte pas le poste. Le remplaçant d’une nuit doit pouvoir y trouver <b>toute sa vacation</b>.
+          </div>
+          <div style="--t:var(--acc)">
+            <b class="titre"><i data-ic="document"></i> La consigne client prime</b>
+            Ce cahier dit <b>comment</b> on applique la consigne du client. Si les deux diffèrent, on suit la consigne client et on prévient le coordinateur.
+          </div>
+          <div style="--t:var(--dom)">
+            <b class="titre"><i data-ic="crayon"></i> Lu et signé</b>
+            Chaque agent le lit avant sa première vacation seul et <b>signe la page de prise en compte</b>, au dernier chapitre.
+          </div>
+        </div>
+
+        <div class="pr-section"><i data-ic="telephone"></i> Les numéros à connaître par cœur</div>
+        <div class="ms-urgences" style="grid-template-columns:1.3fr 1fr 1fr">
+          <div style="--t:var(--dom)"><b style="font-size:26px">[[06 00 00 00 00]]</b><span>[[Astreinte client]]<br>[[quand l’appeler]]</span></div>
+          <div style="--t:var(--acc)"><b>18 · 112</b><span>Pompiers<br>[[conditions d’appel]]</span></div>
+          <div style="--t:var(--dom)"><b style="font-size:24px">[[01 00 00 00 00]]</b><span>[[Télésurveillance SAMSIC]]<br>PTI, appel de sécurité</span></div>
+        </div>
+
+        <div class="pr-ressort"></div>
+        <footer data-pied></footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ MODE D'EMPLOI -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="Mode d’emploi"
+        data-resume="[[Le site en une phrase et pourquoi on applique des consignes précises. Ce cahier reprend la consigne client point par point, avec les gestes, les écrans et les photos du site.]]"></header>
+
+      <div class="pr-section"><i data-ic="cible"></i> Les dix règles qui ne se discutent pas</div>
+      <!-- 10 règles à la 1re personne. q = la règle ; r = le détail + renvoi au chapitre. -->
+      <div class="ms-questions" style="margin-top:3mm">
+        <div><span class="n">1</span><span class="q">[[Je ne quitte pas mon poste tant que je ne suis pas remplacé.]]</span>
+          <span class="r">[[Ce que je fais concrètement.]] <span class="ms-renvoi">Ch. 2</span></span></div>
+        <div><span class="n">2</span><span class="q">[[Règle.]]</span>
+          <span class="r">[[Détail.]] <span class="ms-renvoi">Ch. [[N]]</span></span></div>
+        <div><span class="n">3</span><span class="q">[[Règle.]]</span>
+          <span class="r">[[Détail.]] <span class="ms-renvoi">Ch. [[N]]</span></span></div>
+        <div><span class="n">10</span><span class="q">Tout s’écrit sur la main courante.</span>
+          <span class="r">Allées et venues, appels reçus, alarmes, rondes, anomalies : <b>ce qui n’est pas écrit n’a pas eu lieu</b>. <span class="ms-renvoi">Ch. 2</span></span></div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <div data-bandeau data-l1="[[Un doute ? J’appelle …]]" data-l2="[[Pourquoi on ne dérange jamais pour rien.]]"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ SOMMAIRE -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="Sommaire"
+        data-resume="[[N]] chapitres, dans l’ordre d’une vacation : [[connaître le site, prendre le poste, s’équiper, faire ses rondes, gérer les accès, surveiller les écrans, réagir, et garder le cahier à jour]]."></header>
+
+      <div class="ms-sommaire" style="margin-top:5mm">
+        <div><span class="ms-som-num">1</span><div class="ms-som-txt"><div class="ms-som-titre">Le site et qui appeler</div>
+          <div class="ms-som-desc">[[Le site et ses risques, les horaires, l’annuaire, le schéma d’appel.]]</div></div>
+          <div class="ms-som-axe">Consigne client<br>§ [[1, 2]]</div></div>
+        <div><span class="ms-som-num">2</span><div class="ms-som-txt"><div class="ms-som-titre">Prise et fin de poste</div>
+          <div class="ms-som-desc">[[Arrivée, documents et clés, contrôles, main courante, relève.]]</div></div>
+          <div class="ms-som-axe">Consigne client<br>§ [[3, 4]]</div></div>
+        <div><span class="ms-som-num">8</span><div class="ms-som-txt"><div class="ms-som-titre">Suivi des consignes</div>
+          <div class="ms-som-desc">Qui modifie les consignes, la prise en compte signée, la correspondance avec la consigne client.</div></div>
+          <div class="ms-som-axe">Registre<br>du site</div></div>
+      </div>
+
+      <div class="pr-section"><i data-ic="document"></i> Trois sortes de pages</div>
+      <div class="pr-tuiles" style="grid-template-columns:repeat(3,1fr)">
+        <div class="pr-tuile" style="--t:var(--acc)">
+          <div><div class="pr-tuile-titre"><span class="ms-usage">À lire</span></div>
+            <div class="pr-tuile-txt">Ce qu’il faut savoir et faire. Relu à chaque retour après une longue absence.</div></div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--acc)">
+          <div><div class="pr-tuile-titre"><span class="ms-usage remplir">À remplir</span></div>
+            <div class="pr-tuile-txt">Registres et tableaux : on écrit dessus, au stylo, avec la date et son nom.</div></div>
+        </div>
+        <div class="pr-tuile" style="--t:var(--dom)">
+          <div><div class="pr-tuile-titre"><span class="ms-usage inserer">À insérer</span></div>
+            <div class="pr-tuile-txt">Documents du client rangés derrière le cahier : consigne signée, plan de prévention, planning d’astreinte.</div></div>
+        </div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ CH. 1 · INTERCALAIRE (modèle) -->
+  <!-- La languette descend d'un cran par chapitre : --n:1, --n:2 … jusqu'à 9. -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <div class="ms-languettes"><div class="ms-languette" style="--n:1">1</div></div>
+      <div class="ms-inter">
+        <div class="ms-inter-tete"><img data-logo alt="SAMSIC Sécurité"> Cahier de consignes · [[Site]]</div>
+        <div class="ms-inter-num">01<span>.</span></div>
+        <h1 class="ms-inter-titre">Le site et<br>qui appeler</h1>
+        <div class="ms-inter-axe"><i data-ic="batiment"></i> Consigne client § [[1 et 2]]</div>
+        <p class="ms-inter-pitch">[[Le chapitre en une phrase.]] <b>[[Ce qu’il faut retenir avant tout.]]</b></p>
+
+        <div class="ms-inter-cols">
+          <div class="ms-bloc">
+            <h3><i data-ic="document"></i> Dans ce chapitre</h3>
+            <ol class="ms-contenu">
+              <li><b>[[Le site en un coup d’œil]]</b> <span class="ms-usage">À lire</span></li>
+              <li><b>[[Annuaire]]</b> <span class="ms-usage">À lire</span></li>
+              <li><b>[[Registre …]]</b> <span class="ms-usage remplir">À remplir</span></li>
+            </ol>
+          </div>
+          <div class="ms-bloc" style="--t:var(--acc)">
+            <h3><i data-ic="loupe"></i> L’essentiel</h3>
+            <ul class="ms-audit">
+              <li>[[Fait clé, chiffre ou numéro en <b>gras</b>]]</li>
+              <li>[[Fait clé]]</li>
+              <li>[[Fait clé]]</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pr-ressort"></div>
+        <footer data-pied></footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ 1.1 PAGE « À LIRE » (modèle : fiche d'identité + photos + tuiles) -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="1 · [[Le site en un coup d’œil]]"
+        data-resume="[[Deux phrases : activité du site, histoire, classement.]]"></header>
+
+      <!-- Photos du site dans img/. Variantes : rx-photos trois / quatre / haute / objets ; rx-photo plan (plan entier). -->
+      <!--
+      <div class="rx-photos" style="grid-template-columns:1.25fr 1fr;margin-top:3mm">
+        <figure class="rx-photo"><img src="img/vue-aerienne.jpg" alt=""><figcaption><b>Vue aérienne.</b> Légende.</figcaption></figure>
+        <figure class="rx-photo"><img src="img/entree.jpg" alt=""><figcaption><b>Entrée.</b> Légende.</figcaption></figure>
+      </div>
+      -->
+
+      <div class="rx-id">
+        <div class="large"><div class="rx-lab">Établissement</div><div class="rx-val"><b>[[Nom]]</b> · [[adresse]]</div></div>
+        <div><div class="rx-lab">Téléphone du site</div><div class="rx-val"><span class="cs-tel">[[04 00 00 00 00]]</span></div></div>
+        <div><div class="rx-lab">Classement</div><div class="rx-val"><b>[[Seveso seuil bas]]</b></div></div>
+        <div><div class="rx-lab">[[Rubrique]]</div><div class="rx-val">[[Valeur]]</div></div>
+        <div><div class="rx-lab">Poste de sécurité</div><div class="rx-val">Fixe <span class="cs-tel">[[04 …]]</span><br>PDA <span class="cs-tel">[[06 …]]</span></div></div>
+      </div>
+
+      <div class="pr-section"><i data-ic="alerte"></i> Les risques du site</div>
+      <!-- Risques : rouge #A4453A autorisé pour incendie / explosion, sinon --dom / --acc. -->
+      <div class="pr-tuiles" style="grid-template-columns:repeat(4,1fr)">
+        <div class="pr-tuile" style="--t:#A4453A"><span class="pr-tuile-ic"><i data-ic="flamme"></i></span>
+          <div><div class="pr-tuile-titre">Incendie</div><div class="pr-tuile-txt">[[Ce qui brûle.]]</div></div></div>
+        <div class="pr-tuile" style="--t:#A4453A"><span class="pr-tuile-ic"><i data-ic="eclair"></i></span>
+          <div><div class="pr-tuile-titre">[[Risque]]</div><div class="pr-tuile-txt">[[…]]</div></div></div>
+        <div class="pr-tuile" style="--t:var(--acc)"><span class="pr-tuile-ic"><i data-ic="goutte"></i></span>
+          <div><div class="pr-tuile-titre">[[Risque]]</div><div class="pr-tuile-txt">[[…]]</div></div></div>
+        <div class="pr-tuile" style="--t:var(--dom)"><span class="pr-tuile-ic"><i data-ic="coeur"></i></span>
+          <div><div class="pr-tuile-titre">[[Risque]]</div><div class="pr-tuile-txt">[[…]]</div></div></div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ 1.2 ANNUAIRE (modèle) -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="2 · Annuaire"
+        data-resume="[[Où sont enregistrés les numéros, et quel document fait foi en cas de doute.]]"></header>
+
+      <div class="pr-section"><i data-ic="alerte"></i> Services publics</div>
+      <div class="ms-urgences">
+        <div style="--t:var(--dom)"><b>18</b><span>Pompiers<br>112 depuis un portable</span></div>
+        <div style="--t:var(--acc)"><b>15</b><span>SAMU<br>urgence médicale</span></div>
+        <div style="--t:var(--dom)"><b>17</b><span>Police<br>gendarmerie</span></div>
+        <div style="--t:var(--acc)"><b style="font-size:19px">[[04 72 11 69 11]]</b><span>Centre<br>antipoison</span></div>
+      </div>
+
+      <div class="pr-section"><i data-ic="batiment"></i> [[Client]] · dans l’ordre d’appel</div>
+      <table class="rx-table serre">
+        <tr><th style="width:6%" class="c">Ordre</th><th style="width:34%">Qui</th><th>Heures ouvrées</th><th>Nuit, week-end</th></tr>
+        <tr><td class="c">1</td><td><b>[[Astreinte niveau 1]]</b> · [[fonction]]</td><td><span class="cs-tel">[[06 …]]</span></td><td><span class="cs-tel">[[06 …]]</span></td></tr>
+        <tr><td class="c">2</td><td><b>[[M. Prénom NOM]]</b> · [[fonction]]</td><td><span class="cs-tel">[[04 …]]</span></td><td><span class="cs-tel">[[06 …]]</span></td></tr>
+      </table>
+
+      <div class="pr-section"><i data-ic="bouclier"></i> SAMSIC Sécurité</div>
+      <table class="rx-table serre">
+        <tr><th style="width:40%">Qui</th><th>Téléphone</th><th style="width:30%">Pour quoi</th></tr>
+        <tr><td><b>[[Télésurveillance]]</b></td><td><span class="cs-tel">[[01 …]]</span></td><td>PTI, appel de sécurité, 24 h / 24</td></tr>
+        <tr><td>[[Prénom NOM · coordinateur]]</td><td><span class="cs-tel">[[06 …]]</span></td><td>Le premier contact SAMSIC</td></tr>
+        <tr><td>[[Prénom NOM · responsable d’exploitation]]</td><td><span class="cs-tel">[[06 …]]</span></td><td>Planning, absence, problème de poste</td></tr>
+      </table>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ PAGE « CONDUITE À TENIR » (modèle : étapes + photos + bandeau) -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="1 · [[Feu]]"
+        data-resume="[[Le rôle de l’agent dans cette situation, en une ou deux phrases.]]"></header>
+
+      <div class="fr-etapes" style="margin-top:3mm">
+        <!-- Étape de danger : --et:#A4453A. Sinon alterner var(--et-1) / var(--et-2). Titres à la 1re personne. -->
+        <div class="fr-etape" style="--et:#A4453A">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">1</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>[[Levée de doute sans me mettre en danger]]</span></div>
+            <div class="fr-etape-desc">[[Comment.]]</div></div>
+        </div>
+        <div class="fr-etape" style="--et:var(--et-1)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">2</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>[[J’alerte …]]</span></div>
+            <div class="fr-etape-desc">Je donne : <b>[[nature, lieu, étendue]]</b>, moyens déjà en œuvre.</div></div>
+        </div>
+        <div class="fr-etape" style="--et:var(--et-2)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">3</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>[[Sur ordre : …]]</span></div>
+            <div class="fr-etape-desc">[[Geste précis. Code éventuel : <span class="cs-code">donné en formation</span>.]]</div></div>
+        </div>
+        <div class="fr-etape" style="--et:var(--et-1)">
+          <div class="fr-etape-num"><span class="fr-etape-pastille">4</span></div>
+          <div class="fr-etape-txt"><div class="fr-etape-titre"><span>[[J’accueille les secours et je rends compte]]</span></div>
+            <div class="fr-etape-desc">[[…]], rapport détaillé sur la main courante.</div></div>
+        </div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <div data-bandeau data-l1="[[La règle d’or de la situation.]]" data-l2="[[Ce qu’on fait en cas de doute.]]"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ PAGE CHRONOLOGIE (modèle : déroulé d'une vacation) -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="[[1 · Les rondes de la vacation]]"
+        data-resume="[[Nombre de rondes, durée, ce qui est pointé.]]"></header>
+
+      <div class="pr-section"><i data-ic="horloge"></i> [[Le déroulé]]</div>
+      <!-- Heures « 04 h 00 » ; « fort » = moment clé. -->
+      <ol class="rx-chrono">
+        <li class="fort"><span class="rx-heure">[[20 h 00]]</span><div class="rx-quoi"><b>[[Prise de poste]]</b> : [[…]]</div></li>
+        <li><span class="rx-heure">[[21 h 00]]</span><div class="rx-quoi">[[Ronde 1]]<small>[[pointeaux, durée]]</small></div></li>
+        <li class="fort"><span class="rx-heure">[[06 h 00]]</span><div class="rx-quoi"><b>[[Fin de poste]]</b> : [[…]]</div></li>
+      </ol>
+
+      <div class="pr-section"><i data-ic="alerte"></i> [[Je ne fais jamais]]</div>
+      <div class="pr-duo">
+        <div class="oui"><span class="signe"><i data-ic="coche"></i></span><div><b class="titre">Je fais</b><p>[[Le bon geste.]]</p></div></div>
+        <div class="non"><span class="signe"><i data-ic="croix"></i></span><div><b class="titre">Je ne fais pas</b><p>[[L’erreur fréquente.]]</p></div></div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ CH. 8 · REGISTRE DES CONSIGNES -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="1 · Le registre des consignes"
+        data-resume="Les consignes permanentes sont données par le client. SAMSIC Sécurité les prend en compte et les explicite sous forme de consignes d’application : ce cahier."></header>
+
+      <div class="pr-section"><i data-ic="personnes"></i> Personnes habilitées à donner ou modifier une consigne</div>
+      <table class="rx-table ms-registre">
+        <tr><th style="width:28%">Nom</th><th style="width:34%">Fonction</th><th>Société</th></tr>
+        <tr class="rempli"><td>[[Prénom NOM]]</td><td>[[Fonction]]</td><td>[[Client]]</td></tr>
+        <tr class="rempli"><td>[[Prénom NOM]]</td><td>[[Fonction]]</td><td>SAMSIC Sécurité</td></tr>
+        <tr><td></td><td></td><td></td></tr>
+      </table>
+
+      <div class="pr-section"><i data-ic="crayon"></i> Validation de cette version</div>
+      <div class="ms-signatures" style="--cols:2">
+        <div><div class="ms-lab">Pour le client · [[Prénom NOM, fonction]]</div><small>Date et signature</small></div>
+        <div><div class="ms-lab">Pour SAMSIC · [[Prénom NOM, fonction]]</div><small>Date et signature</small></div>
+      </div>
+
+      <div class="pr-section"><i data-ic="recommencer"></i> Historique des modifications</div>
+      <table class="rx-table ms-registre">
+        <tr><th style="width:16%">Date</th><th>Motif de la modification</th><th style="width:18%">Par</th></tr>
+        <tr class="rempli"><td>[[JJ/MM/AAAA]]</td><td>[[Création / refonte : alignement sur la consigne client …]]</td><td>SAMSIC</td></tr>
+        <tr><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td></tr>
+      </table>
+
+      <div class="pr-section"><i data-ic="calendrier"></i> Les consignes provisoires</div>
+      <div class="pr-check pr-cas">
+        <ul>
+          <li>Une consigne à durée déterminée se range dans le <b>classeur des consignes provisoires</b>, pas dans ce cahier.</li>
+          <li>Elle n’est mise en place que par une personne habilitée, et <b>signée par chaque agent</b> qui prend son service.</li>
+          <li>À chaque prise de poste, je lis les consignes provisoires en cours.</li>
+          <li>Date dépassée : elle est retirée et archivée, à la disposition du client et de l’encadrement SAMSIC.</li>
+        </ul>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ CH. 8 · PRISE EN COMPTE -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="2 · Prise en compte par les agents"
+        data-resume="Chaque agent qui tient le poste, titulaire ou remplaçant, lit ce cahier et signe avant sa première vacation seul. On re-signe à chaque nouvelle version."></header>
+
+      <table class="rx-table ms-registre" style="margin-top:3mm">
+        <tr><th style="width:24%">Nom et prénom</th><th style="width:16%">Fonction</th><th style="width:14%">Version lue</th><th style="width:14%">Date</th><th>« J’ai lu et compris ces consignes »</th></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      </table>
+
+      <div class="pr-section"><i data-ic="diplome"></i> L’équipe du site et ses habilitations</div>
+      <table class="rx-table ms-registre">
+        <tr><th style="width:24%">Nom et prénom</th><th>Carte pro · fin</th><th>MAC APS</th><th>SST · fin</th><th>[[Habilitation site]]</th><th>Formation au poste</th></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </table>
+      <p class="ms-note">Habilitations exigées par la consigne client : [[liste]]. Pas de prise de poste seul sans la formation au poste validée.</p>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+  <!-- ============================================================ CH. 8 · CORRESPONDANCE -->
+  <div class="doc-page fr-page">
+    <div class="fr-frame">
+      <header data-entete data-soustitre="3 · Correspondance avec la consigne client"
+        data-resume="Chaque paragraphe de la consigne [[référence]], version [[N]] applicable au [[JJ/MM/AAAA]], et l’endroit où ce cahier dit comment l’appliquer."></header>
+
+      <table class="rx-table serre" style="margin-top:3mm">
+        <tr><th style="width:9%" class="c">§</th><th style="width:42%">Consigne client</th><th>Dans ce cahier</th></tr>
+        <tr><td class="c">1</td><td>[[Intitulé du paragraphe]]</td><td>Chapitre [[N]] · [[page]]</td></tr>
+        <tr><td class="c">2</td><td>[[Intitulé]]</td><td>Chapitre [[N]]</td></tr>
+      </table>
+
+      <div class="ms-inserer" style="margin-top:4mm">
+        <span class="ms-inserer-ic"><i data-ic="document"></i></span>
+        <div>
+          <h3>Insérer derrière ce cahier</h3>
+          <p>La <b>consigne client signée</b> (version en vigueur), le <b>plan de prévention</b> et ses annexes, [[le planning d’astreinte, les fiches réflexes du client]].</p>
+          <div class="ms-inserer-meta">
+            <div><div class="ms-lab">Fournis par</div>[[Le responsable du site client]]</div>
+            <div><div class="ms-lab">Plan de prévention valable jusqu’au</div><div class="ms-ligne"></div></div>
+            <div><div class="ms-lab">Dernière vérification</div><div class="ms-ligne"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pr-ressort"></div>
+      <footer data-pied></footer>
+    </div>
+  </div>
+
+</div>
+<script src="socle/js/icones.js"></script>
+<script src="socle/js/logo-b64.js"></script>
+<script src="socle/js/agence.js"></script>
+<script src="socle/js/procedure.js"></script>
+</body>
+</html>

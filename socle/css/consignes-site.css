@@ -1,0 +1,43 @@
+/* ============================================================================
+   consignes-site.css — Cahier de consignes et formation au poste d'un site
+   client (total-cournon-*.html). Tout le reste vient du classeur SSE :
+   mase.css, procedure.css, rex.css. Ici, seulement les photos du site et
+   deux ou trois détails.
+   ========================================================================== */
+
+/* Photos de site : on montre l'objet entier, pas un recadrage de ciel. */
+body[data-doc="site"] .rx-photo img { object-position: center; }
+.rx-photos.trois { grid-template-columns: repeat(3, 1fr); }
+.rx-photos.quatre { grid-template-columns: repeat(4, 1fr); }
+.rx-photos.trois .rx-photo img { height: 34mm; }
+.rx-photos.quatre .rx-photo img { height: 30mm; }
+.rx-photos.haute .rx-photo img { height: 46mm; }
+.rx-photos.objets .rx-photo img { object-fit: contain; background: #fff; }
+/* Un plan ou un écran se lit en entier : pas de recadrage. */
+.rx-photo.plan img { height: auto; max-height: 120mm; object-fit: contain; background: #fff; }
+.rx-photo.grande.basse img { height: 44mm; }
+
+/* Un code ne s'écrit jamais dans le cahier : on renvoie à la formation. */
+.cs-code {
+  display: inline-block; padding: 0 2mm; border-radius: 1.5mm;
+  border: 1.2px dashed #9AAAB9; color: #4A5C74; font-weight: 700; font-size: .92em;
+}
+
+/* Numéros de téléphone : lisibles d'un coup d'œil, sans coupure. */
+.cs-tel { font-family: var(--font-titre); font-weight: 800; color: var(--dom); white-space: nowrap; }
+
+/* Tableau des pointeaux et petits tableaux de consignes : plus serrés. */
+.rx-table.serre td, .rx-table.serre th { padding-top: 1.2mm; padding-bottom: 1.2mm; }
+.rx-table td.c, .rx-table th.c { text-align: center; }
+
+/* Fiche d'enregistrement : la ligne de visa en fin de module. */
+.ms-registre tr.visa td { background: #EEF3F7; font-size: 8.4px; font-weight: 700; color: var(--dom); height: 9mm; vertical-align: top; padding-top: 1.2mm; }
+
+/* Question de test : la question imprimée, la réponse à écrire dessous. */
+.ms-registre tr.rempli.q td { background: #F3F7FA; }
+
+/* Chronologie : des heures « 04 h 00 » et des étapes nommées, plus larges
+   que les « 12h00 » des retours d'expérience. */
+body[data-doc="site"] .rx-chrono::before { left: 21mm; }
+body[data-doc="site"] .rx-heure { flex: 0 0 17.5mm; white-space: nowrap; font-size: 10.6px; }
+body[data-doc="site"] .rx-chrono li::after { left: calc(21mm - 1.5mm); }

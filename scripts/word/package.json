@@ -1,0 +1,9 @@
+{
+  "name": "html-vers-word",
+  "private": true,
+  "description": "Export Word modifiable des documents SAMSIC (optionnel). npm install dans ce dossier, puis : node html2docx.js page.html sortie.docx",
+  "dependencies": {
+    "docx": "9.14.0",
+    "jsdom": "24.1.3"
+  }
+}

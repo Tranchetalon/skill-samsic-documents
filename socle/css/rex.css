@@ -1,0 +1,148 @@
+/* ============================================================================
+   rex.css — Retours d'expérience d'exercice (chargé après procedure.css)
+
+   Un REX n'est pas une fiche d'agent : c'est un rapport de plusieurs pages,
+   lu par le client et l'encadrement. Il garde l'habillage SAMSIC des fiches
+   (cartouche, bandeau, pied légal) et ajoute ce qu'un rapport demande :
+   fiche d'identité de l'exercice, photos légendées, tableaux, chronologie,
+   grille d'évaluation et plan d'actions.
+   ========================================================================== */
+
+/* Texte courant : plus dense qu'une fiche, mais même gris. */
+.rx-txt { font-size: 10.6px; line-height: 1.55; color: #4A5C74; margin: 0 0 2mm; }
+.rx-txt b { color: #2b3641; }
+
+/* Mention de confidentialité : vues aériennes d'un site Seveso. */
+.rx-restreint {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 2.5mm; padding: 1.2mm 3mm; border-radius: 20px;
+  border: 1.3px solid var(--dom); color: var(--dom);
+  font-family: var(--font-titre); font-size: 9px; font-weight: 800;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.rx-restreint svg { width: 3.6mm; height: 3.6mm; }
+
+/* ------------------------------------------- Fiche d'identité de l'exercice */
+.rx-id { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; margin-top: 4mm; }
+.rx-id > div {
+  background: #fff; border-radius: 3mm; padding: 2.8mm 3.5mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07);
+  border-top: 3px solid var(--acc);
+}
+.rx-id .large { grid-column: span 2; }
+.rx-id .plein { grid-column: 1 / -1; }
+.rx-lab {
+  font-size: 8px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--acc); margin-bottom: 1mm;
+}
+.rx-val { font-size: 10.6px; line-height: 1.45; color: #2b3641; }
+.rx-val b { color: var(--dom); }
+
+/* ------------------------------------------------------------------ Photos */
+.rx-photo { margin: 0; break-inside: avoid; }
+.rx-photo img {
+  display: block; width: 100%; height: auto; border-radius: 2.5mm;
+  box-shadow: 0 1px 5px rgba(34, 52, 74, .18);
+}
+.rx-photo figcaption {
+  font-size: 8.8px; line-height: 1.4; color: #6b7785; font-style: italic;
+  margin-top: 1.2mm;
+}
+.rx-photo figcaption b { color: var(--dom); font-style: normal; }
+.rx-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 2.5mm; }
+/* Les vues du drone sont à moitié du ciel : on recadre sur le site. */
+.rx-photo img { object-fit: cover; object-position: center 75%; }
+.rx-photo.grande img { height: 54mm; }
+.rx-photos .rx-photo img { height: 36mm; }
+
+/* Chaque page porte déjà son sous-titre de partie : « (suite) » ne ferait
+   que pousser le contenu d'une ligne. */
+body[data-famille="rex"] .lv-suite { display: none; }
+
+/* ---------------------------------------------------------------- Tableaux */
+.rx-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  background: #fff; border-radius: 3mm; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07);
+  font-size: 10px; line-height: 1.4; color: #2b3641;
+  break-inside: avoid;
+}
+.rx-table th {
+  background: var(--dom); color: #fff; text-align: left;
+  font-family: var(--font-titre); font-size: 9.5px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .03em;
+  padding: 2mm 3mm;
+}
+.rx-table td { padding: 1.8mm 3mm; border-bottom: 1px solid #E9EDF1; vertical-align: top; }
+.rx-table tr:last-child td { border-bottom: none; }
+.rx-table td:first-child { font-weight: 700; color: var(--dom); }
+.rx-table tr:nth-child(even) td { background: #F7F9FB; }
+.rx-table .pr-champ { min-width: 22mm; }
+
+/* -------------------------------------------------------------- Chronologie */
+.rx-chrono { position: relative; margin: 2mm 0 0; padding: 0; list-style: none; }
+.rx-chrono::before {
+  content: ''; position: absolute; left: 14mm; top: 2mm; bottom: 2mm;
+  width: 2px; background: color-mix(in srgb, var(--acc) 35%, #fff);
+}
+.rx-chrono li {
+  position: relative; display: flex; gap: 6mm; align-items: flex-start;
+  padding: 1.4mm 0;
+}
+.rx-heure {
+  flex: 0 0 10.5mm; text-align: right;
+  font-family: var(--font-titre); font-size: 11.5px; font-weight: 800; color: var(--dom);
+}
+.rx-chrono li::after {
+  content: ''; position: absolute; left: calc(14mm - 1.5mm); top: 2.6mm;
+  width: 3.2mm; height: 3.2mm; border-radius: 50%; box-sizing: border-box;
+  background: #fff; border: 2px solid var(--acc);
+}
+.rx-chrono li.fort::after { background: var(--acc); }
+.rx-quoi {
+  flex: 1; background: #fff; border-radius: 2.5mm; padding: 1.8mm 3.5mm;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .07);
+  font-size: 10.4px; line-height: 1.45; color: #2b3641;
+}
+.rx-quoi small { display: block; color: #7d8894; font-size: 9px; margin-top: .6mm; }
+
+/* ---------------------------------------------------- Grille d'évaluation */
+/* Les trois niveaux du compte rendu d'exercice : seule exception au « deux
+   couleurs » de la charte, parce que c'est une échelle à lire d'un coup d'œil. */
+.rx-eval { display: flex; flex-direction: column; gap: 1.6mm; }
+.rx-eval > div {
+  display: flex; align-items: center; gap: 3mm;
+  background: #fff; border-radius: 2.5mm; padding: 2mm 3.5mm;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .07);
+  font-size: 10.6px; color: #2b3641; font-weight: 600;
+}
+.rx-eval > div > span:first-child { flex: 1; }
+.rx-niv {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px;
+  padding: .8mm 3mm; border-radius: 20px;
+  font-family: var(--font-titre); font-size: 9px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.rx-niv::before { content: ''; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: currentColor; }
+.rx-niv.ok    { color: #2E6444; background: #E8F3EC; }
+.rx-niv.cours { color: #8A5A00; background: #FBF1DC; }
+.rx-niv.non   { color: #8C2F26; background: #FBEAE8; }
+.rx-eval > div.global { background: var(--dom); color: #fff; }
+.rx-legende { display: flex; gap: 3mm; justify-content: flex-end; margin-top: 1.5mm; }
+
+/* Deux colonnes : points forts / points à améliorer. */
+.rx-bilan { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.rx-bilan > div {
+  background: #fff; border-radius: 3mm; padding: 3mm 4mm;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07);
+  border-top: 3px solid var(--t, var(--dom));
+}
+.rx-bilan h3 {
+  margin: 0 0 1.5mm; display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-titre); font-size: 12px; font-weight: 800;
+  text-transform: uppercase; color: var(--t, var(--dom));
+}
+.rx-bilan h3 svg { width: 4.4mm; height: 4.4mm; }
+.rx-bilan ul { margin: 0; padding-left: 4mm; }
+.rx-bilan li { font-size: 10.2px; line-height: 1.45; color: #4A5C74; margin-bottom: 1mm; }
+.rx-bilan li b { color: #2b3641; }

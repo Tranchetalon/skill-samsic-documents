@@ -1,0 +1,109 @@
+/* ============================================================================
+   doc.css — Styles des DOCUMENTS (aperçu + impression). Format A4 portrait.
+   Palette par défaut ; les couleurs de marque sont surchargées inline par JS
+   depuis les paramètres agence (couleur_primaire / secondaire).
+   ========================================================================== */
+
+.doc-page {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  color: #1F2933;
+  font-family: var(--font-texte);
+  padding: 12mm;
+  box-sizing: border-box;
+}
+
+/* Tous les titres de document en Bricolage Grotesque */
+.doc-page h1, .doc-page h2, .doc-page h3,
+.doc-title, .fp-poste, .fp-sec-title {
+  font-family: var(--font-titre);
+  letter-spacing: -.3px;
+}
+
+/* ------------------------------------------------------------ En-tête commun */
+.doc-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 20px; padding-bottom: 12px; margin-bottom: 16px;
+}
+/* Partie gauche FIGÉE : logo + agence gardent toujours la même taille,
+   ne rétrécissent jamais même si le titre à droite est long. */
+.doc-header-left { display: flex; gap: 14px; align-items: center; flex: 0 0 auto; }
+.doc-logo { height: 62px; width: auto; }
+.doc-logo-txt {
+  background: #22344A; color: #fff; font-weight: 700; font-size: 13px;
+  padding: 12px 14px; border-radius: 6px; text-align: center; line-height: 1.2;
+  white-space: nowrap;
+}
+.doc-agence { font-size: 11px; line-height: 1.5; color: #33414d; white-space: nowrap; }
+.doc-rs { font-weight: 700; font-size: 13px; color: #22344A; }
+/* Le titre à droite occupe l'espace restant et s'adapte (retour à la ligne
+   propre, taille légèrement réduite) sans jamais pousser la partie gauche. */
+.doc-header-right { text-align: right; flex: 1 1 auto; min-width: 0; }
+.doc-title {
+  font-size: 22px; font-weight: 700; letter-spacing: .3px; line-height: 1.15;
+  overflow-wrap: break-word; word-break: break-word;
+}
+.doc-subtitle { font-size: 11px; color: #4a5763; line-height: 1.5; }
+.doc-subtitle-strong { font-weight: 700; font-size: 13px; color: #22344A; }
+
+/* --------------------------------------------------------------- Pied commun */
+.doc-footer {
+  margin-top: 18px; padding-top: 10px; border-top: 1px solid #d7dde3;
+  text-align: center; font-size: 9.5px; color: #6b7783; line-height: 1.5;
+}
+
+/* Le LOT 1 (affichage obligatoire) a son propre fichier : css/affichage.css */
+
+
+/* ============================================================================
+   LOT 2 — Fiche de poste (maquette de référence)
+   ========================================================================== */
+.fp-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 20px; padding-bottom: 14px; margin-bottom: 18px;
+}
+/* Partie gauche FIGÉE (logo + agence), ne rétrécit jamais. */
+.fp-header-left { display: flex; gap: 14px; align-items: center; flex: 0 0 auto; }
+.fp-logo { height: 70px; width: auto; }
+.fp-agence { font-size: 11px; line-height: 1.5; color: #33414d; white-space: nowrap; }
+.fp-rs { font-weight: 700; font-size: 13px; color: #22344A; }
+/* L'intitulé du poste à droite occupe l'espace restant et s'adapte sans
+   pousser la partie gauche (retour à la ligne propre si long). */
+.fp-header-right { text-align: right; flex: 1 1 auto; min-width: 0; }
+.fp-poste {
+  font-size: 32px; font-weight: 700; letter-spacing: .5px; line-height: 1.05;
+  overflow-wrap: break-word; word-break: break-word;
+}
+.fp-site { font-weight: 700; font-size: 14px; color: #22344A; margin-top: 6px; }
+.fp-meta { font-size: 11px; color: #566573; }
+
+/* Grille 6 cartes */
+.fp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 22px; }
+.fp-card {
+  background: #F4F6F8; border-radius: 6px; padding: 12px 14px;
+  border-left: 3px solid #0B5FA5;
+}
+.fp-card-lab { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; font-weight: 700; color: #22344A; margin-bottom: 5px; }
+.fp-card-val { font-size: 12px; color: #2b3641; line-height: 1.4; }
+
+/* Sections */
+.fp-section { margin-bottom: 20px; }
+.fp-sec-title { font-size: 18px; font-weight: 700; color: #22344A; padding-bottom: 6px; border-bottom: 2px solid #0B5FA5; margin-bottom: 12px; }
+
+/* Missions */
+.fp-missions { display: flex; flex-direction: column; gap: 6px; }
+.fp-mission {
+  position: relative; padding: 9px 12px 9px 34px; border-radius: 4px;
+  border-left: 3px solid #0B5FA5; background: #fff; font-size: 12px; color: #2b3641;
+}
+.fp-mission.alt { background: #f6f8fa; }
+.fp-check { position: absolute; left: 12px; top: 8px; font-weight: 700; }
+
+/* Badges habilitations */
+.fp-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.fp-badge { background: #22344A; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+
+.fp-consignes { font-size: 12px; line-height: 1.55; color: #2b3641; }
+
+/* Le LOT 3 (livret d'accueil) a son propre fichier : css/livret.css */

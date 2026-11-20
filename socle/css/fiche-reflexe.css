@@ -1,0 +1,669 @@
+/* ============================================================================
+   fiche-reflexe.css — Fiche réflexe, design « affiche »
+
+   La fiche réflexe n'est plus une page de livret : c'est une AFFICHE. Elle est
+   punaisée au mur d'un poste, lue debout, souvent de loin et vite. D'où les
+   partis pris de ce fichier, calqués sur la maquette de référence
+   (assets/reflex.jpeg) :
+
+     - pas de colonne latérale : la largeur entière sert au contenu ;
+     - un CARTOUCHE marine en haut à droite, coin inférieur gauche biseauté,
+       qui porte le logo SAMSIC Sécurité et la signature de marque ;
+     - le titre en très gros à gauche, avec un sous-titre en or ;
+     - chaque étape est une CARTE pleine largeur : pastille numérotée sur un
+       aplat de couleur à gauche, intitulé + texte au centre, grande icône
+       dans une vignette à droite. Une carte = un réflexe, lisible d'un
+       coup d'œil ;
+     - un BANDEAU de clôture marine ;
+     - un pied de page LÉGAL : agréments CNAPS et article L612-14, qui doivent
+       figurer sur tout document commercial ou d'information de l'entreprise.
+
+   COULEURS — tout vient de la FAMILLE de la fiche, et rien n'est figé ici.
+   js/doc-fiche-reflexe.js pose en style inline, sur la feuille :
+
+     --dom / --dom-fonce  la dominante et sa version foncée : cartouche,
+                          bandeau de clôture, titre. C'est la couleur à
+                          laquelle on reconnaît le thème de loin.
+     --acc                l'accent : sous-titre, filets, médaillon.
+     --et-1 … --et-6      les six aplats numérotés, accordés à la dominante.
+                          Chaque étape prend le suivant, ce qui donne à
+                          l'affiche son rythme vertical.
+     --fam                repris de --dom, pour l'encart « Quand ? ».
+
+   Les valeurs écrites dans .fr-page ci-dessous ne sont que le REPLI (thème
+   « Vie du poste »), utilisé si la feuille n'a pas reçu de palette.
+   ========================================================================== */
+
+.fr-doc { display: flex; flex-direction: column; gap: 20px; }
+
+/* --------------------------------------------------------------- La feuille */
+/* Palette des étapes, reprise de la maquette : marine, or, ardoise, vert,
+   brique, puis bleu pour une éventuelle 6e étape. Au-delà, on recycle. */
+.fr-page {
+  --marge: 7mm;
+
+  /* Palette de la feuille. Ces valeurs sont celles de la famille « Vie du
+     poste » : elles ne servent que de REPLI. js/doc-fiche-reflexe.js les
+     réécrit en style inline à partir de la famille de la fiche, ce qui donne
+     à chaque thème sa couleur dominante (marine pour l'opérationnel, bleu
+     clair pour les RH, terre pour le matériel, rouge pour les incidents,
+     vert pour la santé). */
+  --dom: #22344A;      /* dominante : cartouche, bandeau, titre        */
+  --dom-fonce: #1a2836; /* fin du dégradé des aplats marine            */
+  --acc: #C9A227;      /* accent : sous-titre, médaillon, filets       */
+
+  --et-1: #22344A;
+  --et-2: #8A6410;
+  --et-3: #4A5C74;
+  --et-4: #3E7B54;
+  --et-5: #A4453A;
+  --et-6: #0B5FA5;
+
+  position: relative;
+  min-height: 297mm;
+  padding: var(--marge);
+  background: #fff;
+}
+
+/* Cadre intérieur : il porte le décor et le fond très légèrement bleuté qui,
+   sur la maquette, détache les cartes blanches du papier. */
+.fr-frame {
+  position: relative;
+  min-height: calc(297mm - 2 * var(--marge));
+  display: flex; flex-direction: column;
+  padding: 8mm 9mm 6mm;
+  border-radius: 3mm;
+  background: linear-gradient(170deg, #F7F9FB 0%, #FBFCFD 55%, #F5F8FA 100%);
+  box-shadow: 0 0 0 1px rgba(34, 52, 74, .10);
+  overflow: hidden;
+}
+
+/* =================================================================== En-tête */
+/* Titre à gauche, cartouche marine à droite. Le cartouche déborde du padding
+   du cadre (marges négatives) pour aller toucher le bord, comme sur la
+   maquette : c'est ce débord qui lui donne son poids. */
+/* Les marges négatives annulent le padding du cadre du côté haut et droit :
+   elles doivent donc suivre `.fr-frame { padding }` à l'identique. */
+.fr-entete {
+  display: flex; align-items: flex-start; gap: 6mm;
+  margin: -8mm -9mm 0 0;   /* le cartouche remonte et va au bord droit */
+}
+
+.fr-entete-txt {
+  flex: 1; min-width: 0;
+  padding-top: 2mm;
+}
+
+/* Le titre est la seule chose lisible à trois mètres : il est donc énorme,
+   très gras, et serré. */
+.fr-titre {
+  font-family: var(--font-titre);
+  font-size: 36px; font-weight: 800; letter-spacing: -1.4px; line-height: .98;
+  text-transform: uppercase;
+  color: var(--dom, #22344A);
+  margin: 0;
+}
+.fr-titre .lv-suite {
+  font-size: 20px; font-weight: 600; letter-spacing: 0;
+  text-transform: none; color: #8b96a2;
+}
+
+/* Sous-titre : le nombre de points, en or. Sur la maquette c'est lui qui
+   annonce la structure de l'affiche avant même qu'on la lise. */
+.fr-soustitre {
+  font-family: var(--font-titre);
+  font-size: 20px; font-weight: 700; letter-spacing: -.4px;
+  text-transform: uppercase;
+  color: var(--acc, #C9A227);
+  margin-top: 2px;
+}
+
+.fr-filet {
+  width: 46px; height: 3px; border-radius: 2px;
+  background: var(--acc, #C9A227);
+  margin: 7px 0 0;
+}
+
+.fr-resume {
+  font-size: 11.5px; line-height: 1.5; color: #4A5C74;
+  max-width: 48ch;
+  margin-top: 7px;
+}
+
+/* ------------------------------------------------------------- Le cartouche */
+/* Bloc marine du coin supérieur droit, biseauté au coin inférieur gauche.
+   Étant découpé au clip-path, il n'accepte ni bordure ni ombre sur son
+   biseau : le liseré or est donc obtenu par un drop-shadow porté par le
+   conteneur — le filtre suit la forme découpée, biseau compris, là où un
+   box-shadow suivrait le rectangle d'origine. */
+.fr-cartouche-wrap {
+  flex: 0 0 auto;
+  filter: drop-shadow(0 1.1mm 0 var(--acc, #C9A227));
+}
+.fr-cartouche {
+  position: relative;
+  width: 56mm;
+  padding: 5mm 6mm 4mm 11mm;
+  background: linear-gradient(155deg, var(--dom, #22344A) 0%, var(--dom-fonce, #1a2836) 100%);
+  color: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 13mm 100%, 0 calc(100% - 13mm));
+  display: flex; flex-direction: column; align-items: center; gap: 2.5mm;
+}
+
+.fr-cartouche-logo {
+  display: block;
+  width: 18mm; height: auto;
+  border-radius: 2mm;
+}
+/* Repli typographique si aucune image de logo n'est disponible. */
+.fr-cartouche-logo-txt {
+  font-family: var(--font-titre);
+  font-size: 17px; font-weight: 800; line-height: 1.1; text-align: center;
+  letter-spacing: .04em;
+}
+.fr-cartouche-logo-txt small {
+  display: block;
+  font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  color: #6FB6E8; margin-top: 2px;
+}
+
+/* Signature de marque sous le logo. */
+.fr-cartouche-baseline {
+  font-family: var(--font-texte);
+  font-size: 8px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  text-align: center; line-height: 1.4;
+  opacity: .82;
+}
+
+/* ============================================================ Déclencheur */
+/* « Quand utilise-t-on cette fiche ? » — première question de l'agent qui la
+   décroche du mur. Encart plein largeur, sous l'en-tête. */
+.fr-declencheur {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: #fff;
+  border: 1px solid #E4E9EE;
+  border-left: 4px solid var(--fam, #0B5FA5);
+  border-radius: 3mm;
+  padding: 3.5mm 5mm;
+  margin: 5mm 0 0;
+  box-shadow: 0 1px 3px rgba(34, 52, 74, .05);
+  break-inside: avoid;
+}
+.fr-declencheur-lab {
+  flex: 0 0 auto; width: 19mm;
+  font-family: var(--font-texte);
+  font-size: 8.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fam, #0B5FA5);
+  padding-top: 2px;
+}
+.fr-declencheur-txt { flex: 1; font-size: 11px; line-height: 1.5; color: #2b3641; }
+
+/* ================================================================= Le corps */
+.fr-corps { flex: 1; display: flex; flex-direction: column; }
+
+/* ================================================================= Étapes */
+/* Les cartes. Espacement généreux : sur une affiche, le blanc entre deux
+   points est ce qui rend chacun distinct. */
+.fr-etapes {
+  display: flex; flex-direction: column; gap: 2mm;
+  margin: 3.5mm 0 0;
+}
+
+/* Une carte : aplat de couleur à gauche (qui porte le numéro), fond blanc à
+   droite. L'aplat s'arrête sur une courbe — le pseudo-élément ::after ci-
+   dessous — exactement comme sur la maquette. */
+.fr-etape {
+  position: relative;
+  display: flex; align-items: stretch;
+  min-height: 16mm;
+  border-radius: 3.4mm;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(34, 52, 74, .07);
+  overflow: hidden;
+  break-inside: avoid; page-break-inside: avoid;
+}
+
+/* ------------------------------------------------------------ Le numéro */
+/* La zone colorée. Sa largeur est fixe : les numéros de toutes les cartes
+   s'alignent, ce qui donne la colonne verticale visible sur la maquette. */
+/* L'aplat et sa courbe forment une couche à part, posée SOUS le texte : le
+   disque blanc qui creuse le bord droit déborde de l'aplat, et sans cette
+   séparation explicite il recouvrirait le début de chaque ligne.
+   `isolation` crée le contexte d'empilement qui rend le z-index fiable quel
+   que soit l'ordre du DOM. */
+.fr-etape-num {
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  width: 18mm;
+  background: var(--et, #22344A);
+  display: grid; place-items: center;
+}
+/* La courbe : un disque blanc débordant sur la droite de l'aplat, qui
+   « creuse » son bord. C'est ce détail qui fait la signature graphique de la
+   maquette — sans lui, la carte redevient un simple rectangle bicolore. */
+.fr-etape-num::after {
+  content: '';
+  position: absolute; right: -10.5mm; top: -6mm; bottom: -6mm;
+  width: 21mm;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 1;
+}
+/* La pastille : chiffre blanc dans un cercle de la couleur de l'étape. Elle
+   se pose SUR la courbe, à cheval sur les deux zones. */
+.fr-etape-pastille {
+  position: relative; z-index: 2;
+  width: 11mm; height: 11mm;
+  margin-left: 5.5mm;              /* décalée à droite, sur la courbe */
+  border-radius: 50%;
+  background: var(--et, #22344A);
+  color: #fff;
+  font-family: var(--font-titre);
+  font-size: 17px; font-weight: 800; line-height: 1;
+  display: grid; place-items: center;
+  box-shadow: 0 0 0 1mm #fff;    /* détoure la pastille de la courbe */
+}
+
+/* -------------------------------------------------------------- Le texte */
+/* Au-dessus de la couche de l'aplat : le débord du disque blanc passe
+   derrière le texte, jamais devant. La marge gauche laisse passer ce débord
+   avant le filet de séparation. */
+.fr-etape-txt {
+  position: relative; z-index: 1;
+  flex: 1; min-width: 0;
+  padding: 2mm 3.4mm 2mm 3.4mm;
+  display: flex; flex-direction: column; justify-content: center;
+  /* Filet vertical de séparation, comme sur la maquette. */
+  border-left: 1px solid #E4E9EE;
+  margin-left: 6.5mm;
+}
+
+/* Intitulé : verbe d'action, en capitales, à la couleur de l'étape. */
+.fr-etape-titre {
+  display: flex; align-items: flex-start; gap: 7px;
+  font-family: var(--font-titre);
+  font-size: 15px; font-weight: 800; letter-spacing: -.2px; line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--et, #22344A);
+  margin-bottom: 3px;
+}
+/* Petite icône dans une pastille pleine, juste avant l'intitulé.
+   Deux précautions pour qu'elle reste un CERCLE : `flex: 0 0 7.5mm` l'empêche
+   d'être écrasée en croissant par un intitulé long, et `align-self: flex-start`
+   l'empêche d'être étirée en ellipse sur la hauteur d'un titre à deux lignes. */
+.fr-etape-ic {
+  flex: 0 0 7.5mm;
+  align-self: flex-start;
+  width: 7.5mm; height: 7.5mm;
+  border-radius: 50%;
+  background: var(--et, #22344A);
+  color: #fff;
+  display: grid; place-items: center;
+}
+.fr-etape-ic svg { width: 4.4mm; height: 4.4mm; display: block; }
+/* L'intitulé occupe le reste de la ligne et se replie sur deux lignes plutôt
+   que de comprimer la pastille. Le `:not()` est indispensable : la pastille
+   est elle aussi un <span> enfant du titre, et sans lui cette règle la ferait
+   s'étirer sur toute la largeur — le cercle deviendrait une ellipse. */
+.fr-etape-titre > span:not(.fr-etape-ic) { flex: 1; min-width: 0; }
+
+.fr-etape-desc {
+  font-size: 10.5px; line-height: 1.45; color: #4A5C74;
+}
+
+/* Métadonnées : délai, interlocuteur, document. Elles répondent aux questions
+   « quand », « à qui », « avec quoi » sans alourdir la lecture principale. */
+.fr-etape-meta {
+  display: flex; flex-wrap: wrap; gap: 4px 6px;
+  margin-top: 4px;
+}
+.fr-meta {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-texte);
+  font-size: 8.5px; line-height: 1.3;
+  padding: 2px 7px;
+  border-radius: 20px;
+  border: 1px solid #dde3e9;
+  background: #FAFBFC;
+  color: #55636f;
+  white-space: nowrap;
+}
+.fr-meta-lab {
+  font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  font-size: 7.5px; color: #97a2ad;
+}
+/* Le délai porte la couleur de l'étape : c'est la métadonnée dont l'oubli
+   fait échouer la démarche. */
+.fr-meta.delai {
+  border-color: var(--et, #0B5FA5);
+  color: var(--et, #0B5FA5);
+  background: #fff;
+  font-weight: 700;
+}
+.fr-meta.delai .fr-meta-lab { color: inherit; opacity: .6; }
+
+/* ------------------------------------------------------- La grande icône */
+/* Vignette de droite : la même icône que celle de l'intitulé, en grand, sur
+   un fond teinté de la couleur de l'étape. C'est le repère qu'on retient
+   d'une affiche — on reconnaît le point à sa forme avant de le relire. */
+.fr-etape-vignette {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 15mm; height: 12mm;
+  margin-right: 3.4mm;
+  border-radius: 2.6mm;
+  background: color-mix(in srgb, var(--et, #22344A) 7%, #fff);
+  color: var(--et, #22344A);
+  display: grid; place-items: center;
+}
+.fr-etape-vignette svg { width: 8.6mm; height: 8.6mm; display: block; stroke-width: 1.5; }
+
+/* ======================================================== Bas de fiche */
+/* Vigilance et documents : ce qu'on relit après avoir suivi les étapes. */
+.fr-bas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm;
+  margin-top: 3.5mm;
+  break-inside: avoid;
+}
+.fr-bas.seul { grid-template-columns: 1fr; }
+
+.fr-encart {
+  border-radius: 3mm;
+  padding: 3mm 4mm;
+  break-inside: avoid; page-break-inside: avoid;
+}
+.fr-encart-titre {
+  font-family: var(--font-texte);
+  font-size: 8.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 5px;
+}
+.fr-encart-titre svg { width: 4mm; height: 4mm; }
+.fr-encart ul { margin: 0; padding-left: 15px; }
+.fr-encart li { font-size: 9.5px; line-height: 1.45; margin-bottom: 2.5px; }
+.fr-encart li:last-child { margin-bottom: 0; }
+
+/* Vigilance : fond ambré. Le rouge serait mal choisi — ces points ne sont pas
+   des dangers, ce sont les erreurs qui font échouer la démarche. */
+.fr-encart.vigilance {
+  background: #FDF8EC;
+  border: 1px solid #ECD9A8;
+}
+.fr-encart.vigilance .fr-encart-titre { color: #8a6614; }
+.fr-encart.vigilance li { color: #6b5411; }
+
+/* Documents à fournir : neutre, c'est une liste de courses. */
+.fr-encart.documents {
+  background: #fff;
+  border: 1px solid #E4E9EE;
+}
+.fr-encart.documents .fr-encart-titre { color: #4a5561; }
+.fr-encart.documents li { color: #55636f; }
+
+/* ===================================================== Bandeau de clôture */
+/* Le rappel qui ferme l'affiche. Marine pleine largeur, médaillon or à
+   gauche, icône « équipe » à droite : c'est la respiration finale du
+   document, celle qui dit à qui il s'adresse. */
+.fr-bandeau {
+  display: flex; align-items: center; gap: 5mm;
+  margin-top: 3.5mm;
+  padding: 4mm 6mm;
+  border-radius: 3mm;
+  background: linear-gradient(120deg, var(--dom, #22344A) 0%, var(--dom-fonce, #1a2836) 100%);
+  color: #fff;
+  break-inside: avoid;
+}
+.fr-bandeau-medaillon {
+  flex: 0 0 auto;
+  width: 11mm; height: 11mm;
+  border-radius: 50%;
+  border: 1.5px solid var(--acc, #C9A227);
+  color: var(--acc, #C9A227);
+  display: grid; place-items: center;
+}
+.fr-bandeau-medaillon svg { width: 5.5mm; height: 5.5mm; }
+.fr-bandeau-txt { flex: 1; min-width: 0; }
+.fr-bandeau-l1 {
+  font-family: var(--font-titre);
+  font-size: 14px; font-weight: 800; letter-spacing: -.1px;
+  text-transform: uppercase;
+}
+.fr-bandeau-l2 {
+  font-family: var(--font-titre);
+  font-size: 11.5px; font-weight: 700; letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #C9A227;
+  margin-top: 2px;
+}
+.fr-bandeau-ic {
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, .32);
+}
+.fr-bandeau-ic svg { width: 12mm; height: 12mm; stroke-width: 1.4; }
+
+/* ================================================== Bloc de signature */
+/* Optionnel : certaines fiches servent de support d'émargement (remise de
+   consigne, accusé de lecture). Les traits restent vides à l'impression. */
+.fr-signature {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 6mm;
+  margin-top: 5mm;
+  padding: 4mm 5mm;
+  border: 1px solid #E4E9EE;
+  border-radius: 3mm;
+  background: #fff;
+  break-inside: avoid;
+}
+.fr-signature > div { display: flex; flex-direction: column; gap: 3px; }
+.fr-sig-lab {
+  font-family: var(--font-texte);
+  font-size: 8px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: #97a2ad;
+}
+.fr-sig-case {
+  border-bottom: 1px solid #b9c2cc;
+  height: 11mm;
+}
+
+/* ============================================================ Pied de page */
+/* Le pied porte deux choses de nature différente, d'où les deux étages :
+     - la provenance du document (agence, date de mise à jour) ;
+     - les MENTIONS LÉGALES : numéros d'autorisation d'exercice CNAPS et
+       article L612-14, qui doivent figurer sur les documents de l'entreprise.
+   Ces mentions sont petites mais jamais absentes : elles sont la raison
+   d'être du pied, pas une note de bas de page facultative. */
+.fr-pied {
+  margin-top: auto;
+  padding-top: 4mm;
+}
+/* Filet d'ouverture, avec le médaillon centré de la maquette. */
+.fr-pied-filet {
+  display: flex; align-items: center; gap: 4mm;
+  color: #C9A227;
+  margin-bottom: 3.5mm;
+}
+.fr-pied-filet::before, .fr-pied-filet::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, #DFD3AE, transparent);
+}
+.fr-pied-filet svg { width: 4.5mm; height: 4.5mm; display: block; }
+
+.fr-pied-provenance {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-texte);
+  font-size: 8.5px; color: #7d8894;
+  margin-bottom: 2.5mm;
+}
+.fr-pied-provenance span:nth-child(2) { flex: 1; text-align: center; }
+
+/* ------------------------------------------------------ Mentions légales */
+/* Mention légale : petite, mais elle doit rester LISIBLE une fois imprimée en
+   noir et blanc — d'où un gris franc plutôt qu'un gris clair, qui disparaît
+   à l'impression laser. */
+.fr-legal {
+  font-family: var(--font-texte);
+  font-size: 7.4px; line-height: 1.5; color: #6B7683;
+  text-align: center;
+}
+.fr-legal-agrements {
+  font-weight: 700; color: #4A5561;
+  letter-spacing: .02em;
+  margin-bottom: 1.5mm;
+}
+/* Les numéros d'autorisation ne doivent jamais se couper en deux lignes :
+   un numéro tronqué n'est plus vérifiable. */
+.fr-legal-agrements b {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.fr-legal-article { max-width: 145mm; margin: 0 auto; }
+
+/* ============================================================ Mode compact */
+/* Une fiche réflexe tient sur UNE feuille : c'est ce qui en fait une affiche
+   qu'on punaise, et non un document qu'on feuillette. Passé cinq étapes, le
+   rythme aéré ci-dessus ne rentre plus — le module pose alors `.compact` sur
+   la feuille (voir js/doc-fiche-reflexe.js).
+
+   Ce mode resserre les BLANCS et les éléments décoratifs ; il ne touche pas à
+   la taille du texte des étapes, qui est ce qui rend l'affiche lisible de
+   loin. Les fiches courtes gardent l'aspect aéré, sans rien changer. */
+.fr-page.compact .fr-etapes { gap: 1.6mm; margin-top: 3mm; }
+
+.fr-page.compact .fr-etape { min-height: 14mm; border-radius: 3mm; }
+.fr-page.compact .fr-etape-num { width: 16mm; }
+.fr-page.compact .fr-etape-num::after { right: -9.5mm; width: 19mm; }
+.fr-page.compact .fr-etape-pastille {
+  width: 9.6mm; height: 9.6mm;
+  margin-left: 4.8mm;
+  font-size: 15px;
+  box-shadow: 0 0 0 1mm #fff;
+}
+.fr-page.compact .fr-etape-txt {
+  padding: 1.7mm 3mm;
+  margin-left: 5.6mm;
+}
+.fr-page.compact .fr-etape-titre { font-size: 14px; margin-bottom: 2px; }
+.fr-page.compact .fr-etape-desc { font-size: 10px; line-height: 1.4; }
+.fr-page.compact .fr-etape-meta { margin-top: 3px; }
+
+/* La vignette est le premier décor sacrifié : elle rend l'affiche mémorable,
+   mais l'étape reste lisible sans elle grâce à la pastille de l'intitulé. */
+.fr-page.compact .fr-etape-vignette {
+  width: 12.5mm; height: 10mm;
+  margin-right: 2.6mm;
+}
+.fr-page.compact .fr-etape-vignette svg { width: 7.2mm; height: 7.2mm; }
+
+.fr-page.compact .fr-declencheur { padding: 2.6mm 4mm; margin-top: 4mm; }
+.fr-page.compact .fr-declencheur-txt { font-size: 10.5px; line-height: 1.45; }
+
+.fr-page.compact .fr-bas { gap: 2.5mm; margin-top: 3mm; }
+.fr-page.compact .fr-encart { padding: 2.5mm 3.5mm; }
+.fr-page.compact .fr-encart-titre { margin-bottom: 4px; }
+.fr-page.compact .fr-encart li { font-size: 9px; line-height: 1.4; margin-bottom: 2px; }
+
+.fr-page.compact .fr-bandeau { padding: 3mm 5mm; margin-top: 3mm; }
+.fr-page.compact .fr-bandeau-l1 { font-size: 12.5px; }
+.fr-page.compact .fr-bandeau-l2 { font-size: 10.5px; }
+
+.fr-page.compact .fr-pied { padding-top: 3mm; }
+.fr-page.compact .fr-pied-filet { margin-bottom: 2.5mm; }
+
+/* Second cran, pour les fiches de six étapes et plus : le mode compact seul
+   ne suffit plus. On rogne encore les blancs, et l'en-tête cède sa place —
+   le résumé et le grand titre sont ce qui se comprime le mieux, puisque le
+   contenu utile est dans les étapes. */
+.fr-page.tres-compact .fr-titre { font-size: 30px; letter-spacing: -1.1px; }
+.fr-page.tres-compact .fr-soustitre { font-size: 17px; }
+.fr-page.tres-compact .fr-resume { font-size: 10.5px; line-height: 1.45; margin-top: 5px; }
+.fr-page.tres-compact .fr-filet { margin-top: 5px; }
+.fr-page.tres-compact .fr-cartouche { padding: 4mm 5mm 3.5mm 10mm; width: 50mm; }
+.fr-page.tres-compact .fr-cartouche-logo { width: 15mm; }
+.fr-page.tres-compact .fr-cartouche-baseline { font-size: 7px; }
+
+.fr-page.tres-compact .fr-etapes { gap: 1.3mm; margin-top: 2.5mm; }
+.fr-page.tres-compact .fr-etape { min-height: 12.5mm; }
+.fr-page.tres-compact .fr-etape-txt { padding: 1.4mm 3mm; }
+.fr-page.tres-compact .fr-etape-desc { font-size: 9.5px; line-height: 1.38; }
+.fr-page.tres-compact .fr-declencheur { padding: 2.2mm 4mm; margin-top: 3.5mm; }
+.fr-page.tres-compact .fr-bas { margin-top: 2.5mm; }
+.fr-page.tres-compact .fr-bandeau { padding: 2.5mm 5mm; margin-top: 2.5mm; }
+
+/* ================================================================ Cas vides */
+/* Encart « contenu à compléter » : une fiche livrée vide s'imprime en le
+   disant, plutôt que de laisser croire à une procédure complète. */
+.fr-todo {
+  border: 1px dashed #d3b464;
+  background: #fdf8ec;
+  border-radius: 3mm;
+  padding: 3.5mm 4.5mm;
+  margin: 4mm 0;
+  font-size: 10.5px; line-height: 1.5; color: #7a5c14;
+}
+.fr-todo::before {
+  content: 'À compléter — ';
+  font-weight: 700; text-transform: uppercase; font-size: 9.5px; letter-spacing: .05em;
+}
+
+/* Fiche sans aucune étape : l'aperçu doit le dire clairement plutôt que
+   d'afficher une page presque vide sans explication. */
+.fr-vide {
+  display: grid; place-items: center;
+  min-height: 60mm;
+  text-align: center;
+  color: #97a2ad; font-size: 12px; line-height: 1.6;
+  padding: 20mm;
+}
+
+/* ==================================================== Formulaire (écran) */
+/* Éditeur d'étapes de l'onglet Génération : uniquement à l'écran, jamais
+   imprimé. Une étape = une ligne dépliable, réordonnable par glisser-déposer. */
+.fr-ed-etape {
+  border: 1px solid var(--bord);
+  border-radius: 7px;
+  background: #fff;
+  margin-bottom: 7px;
+  overflow: hidden;
+}
+.fr-ed-etape.ouvert { border-color: var(--bleu); }
+
+.fr-ed-tete {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.fr-ed-tete:hover { background: #f7f9fb; }
+.fr-ed-poignee { color: #b9c2cc; cursor: grab; font-size: 13px; }
+.fr-ed-num {
+  flex: 0 0 auto;
+  width: 21px; height: 21px; border-radius: 50%;
+  background: var(--bleu); color: #fff;
+  font-size: 11px; font-weight: 700;
+  display: grid; place-items: center;
+}
+.fr-ed-lib {
+  flex: 1; min-width: 0;
+  font-size: 13px; font-weight: 600; color: var(--texte);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.fr-ed-lib.vide { color: #a4aeb8; font-weight: 400; font-style: italic; }
+.fr-ed-corps { padding: 4px 10px 11px; border-top: 1px solid var(--bord); }
+
+/* Bandeau d'état de la fiche courante (catalogue / modèle enregistré). */
+.fr-etat {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 12px; color: #55636f;
+  margin-bottom: 10px;
+}
+.fr-etat-badge {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .04em;
+  padding: 2px 8px; border-radius: 20px;
+  background: #eef1f4; color: #55636f;
+}
+.fr-etat-badge.modele { background: #e4f1ea; color: #1e8e4e; }
+.fr-etat-badge.modifie { background: #fdf3dd; color: #8a6614; }
