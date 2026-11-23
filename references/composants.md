@@ -85,6 +85,14 @@ CSS à charger, dans l'ordre : `fonts`, `doc`, `fiche-reflexe`, `procedure`, pui
 | `.rx-eval > div > span + span.rx-niv.ok/.cours/.non` (+ `div.global`) | grille d'évaluation |
 | `.rx-bilan > div(style --t) > h3 + ul` | points forts / à améliorer |
 
+## Zones à remplir et PDF remplissable
+
+Toute zone « au stylo » de ce catalogue (cellule vide, `ms-ligne`, `pr-champ`, `ms-case`,
+`pr-check`, `ms-signatures`, `ms-zone`…) devient automatiquement un champ avec
+`pdf.js --formulaire`. Attributs pour cas particuliers : `data-champ="Nom"` (forcer un champ
+texte), `data-champ-type="case"` (case à cocher), `data-champ="non"` (exclure). Détails :
+[pdf-remplissable.md](pdf-remplissable.md).
+
 ## Classeur et cahier (mase.css, consignes-site.css)
 
 | Bloc | Usage |

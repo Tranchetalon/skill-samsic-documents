@@ -56,12 +56,33 @@ Toujours lire aussi :
    Le script signale les feuilles qui débordent (texte coupé) et les repères `[[…]]` restants,
    et sort avec le code 2. Corriger (raccourcir, répartir sur une feuille de plus) et relancer
    jusqu'au code 0, sauf repères volontairement laissés à confirmer.
+
+   **PDF remplissable (formulaire AcroForm)** : ajouter `--formulaire`. Chaque zone « au stylo »
+   devient un vrai champ qu'on remplit à l'écran (Acrobat Reader, Edge, Chrome) ; la feuille
+   imprimée reste identique. Voir [references/pdf-remplissable.md](references/pdf-remplissable.md).
+   À utiliser **par défaut** pour le classeur SSE, les registres et pages « À remplir » d'un
+   cahier de consignes, la formation au poste, les formulaires ; et chaque fois que l'utilisateur
+   demande un PDF « modifiable », « remplissable », « à compléter à l'écran ».
 5. **Relire le PDF** avec l'outil de lecture, page par page : rien de coupé, pas de feuille à
    moitié vide (regrouper), pas de titre orphelin en bas de feuille, numérotation des étapes
    et des pages cohérente.
 6. **Word modifiable** (seulement si demandé) : voir [references/export-word.md](references/export-word.md).
 7. **Rendre** : chemin du PDF, nombre de pages, et la liste des points à confirmer
    (repères laissés, informations supposées, écarts avec la source).
+
+### Modifier un document existant
+
+On ne retouche **jamais le PDF** : on modifie la page HTML source, puis on régénère le PDF.
+1. Retrouver la source : le dossier créé par `nouveau.js` (page `.html` à côté du PDF), ou le
+   projet d'origine de l'agence s'il existe (par exemple `GenerateurDocs/fiches-procedures/`).
+   Si seul le PDF existe, recréer le document avec le bon modèle en reprenant son contenu,
+   et le signaler.
+2. Faire la modification demandée (ajouter, retirer ou réécrire une page, une étape, un onglet),
+   en gardant la numérotation cohérente : étapes, `N · Titre` des sous-titres, languettes,
+   sommaire, renvois `Ch. N` / `Onglet N`, table de correspondance.
+3. Mettre `data-maj` à la date du jour et, pour un cahier ou un classeur, ajouter une ligne à
+   l'historique des modifications.
+4. Régénérer le PDF (même nom, même option `--formulaire` qu'avant) et relire les feuilles touchées.
 
 Nom du PDF : `<Type> - <Sujet> - <Site ou date>.pdf`, sans caractères interdits (`/ \ : * ? " < > |`).
 Exemples : `Cahier de consignes - Dépôt de Cournon.pdf`, `REX - Exercice alerte drone - 12-10-2026.pdf`,
@@ -91,3 +112,5 @@ contient encore les valeurs d'une autre, le lui signaler une fois et proposer de
 
 Node.js 18 ou plus, et Google Chrome ou Microsoft Edge installé (impression PDF headless).
 Chemin non standard : variable d'environnement `CHROME_PATH`.
+PDF remplissable : une fois `npm install` dans `<skill>/scripts/formulaire` (le faire soi-même
+si `pdf.js --formulaire` le demande). Export Word : une fois `npm install` dans `<skill>/scripts/word`.

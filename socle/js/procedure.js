@@ -193,6 +193,118 @@
         ' mm coupés en bas de cette page. Raccourcir ou répartir sur une page de plus.</div>');
     });
     document.body.setAttribute('data-pages-debordantes', n);
+    champs();
+  }
+
+  // Zones à remplir. Pour le PDF remplissable (scripts/pdf.js --formulaire),
+  // on mesure chaque zone « au stylo » de chaque feuille et on écrit leurs
+  // positions, en points PDF depuis le coin haut-gauche de la feuille, dans
+  // <script id="samsic-champs">. Repérage automatique :
+  //   texte : cellule vide d'un tableau, .ms-ligne vide, .pr-champ, .fr-sig-case,
+  //           cadre de .ms-signatures, .ms-zone, .ms-score-box vide, .ms-role-champs .v vide
+  //   case  : .ms-case, .pr-check li (hors .pr-cas), cellule vide de moins de 9 mm
+  // Forcer : data-champ="Nom" (data-champ-type="case" pour une case).
+  // Exclure : data-champ="non" sur l'élément ou un parent.
+  function champs() {
+    const PT = 0.75;                       // 1 px CSS = 0,75 pt
+    const MM = 96 / 25.4;                  // px par mm
+    const liste = [];
+    const noms = {};
+    const propre = (s) => String(s || '').replace(/\s+/g, ' ').replace(/[.]/g, '').trim().slice(0, 60);
+    const nommer = (base) => {
+      let nom = propre(base) || 'Champ';
+      if (noms[nom]) { noms[nom]++; nom += ' (' + noms[nom] + ')'; } else noms[nom] = 1;
+      return nom;
+    };
+    const exclu = (el) => !!el.closest('[data-champ="non"], .ms-corrige');
+    const vide = (el) => !el.textContent.trim() && !el.querySelector('img, svg, .pr-champ, [data-champ]');
+
+    document.querySelectorAll('.doc-page').forEach((page, p) => {
+      const ref = page.getBoundingClientRect();
+      const titre = (page.querySelector('.fr-soustitre') || {}).textContent || '';
+      const pref = 'P' + (p + 1) + (titre ? ' ' + propre(titre).slice(0, 30) : '') + ' | ';
+      const poser = (type, r, nom, multi) => {
+        if (r.width < 2 || r.height < 2) return;
+        liste.push({ page: p, type, nom: nommer(pref + nom), multi: !!multi,
+          x: (r.left - ref.left) * PT, y: (r.top - ref.top) * PT, l: r.width * PT, h: r.height * PT });
+      };
+      const boite = (r, dx, dy, l, h) => ({ left: r.left + dx, top: r.top + dy, width: l, height: h });
+      const fait = new Set();
+
+      // Champs explicites.
+      page.querySelectorAll('[data-champ]').forEach((el) => {
+        if (el.dataset.champ === 'non') return;
+        fait.add(el);
+        const r = el.getBoundingClientRect();
+        poser(el.dataset.champType === 'case' ? 'case' : 'texte', r, el.dataset.champ, r.height > 9 * MM);
+      });
+
+      // Cellules vides des tableaux : nom = en-tête de colonne + numéro de ligne.
+      page.querySelectorAll('table td').forEach((td) => {
+        if (fait.has(td) || exclu(td) || !vide(td)) return;
+        const tr = td.parentElement;
+        const table = td.closest('table');
+        const entetes = [...(table.querySelector('tr') || { cells: [] }).cells];
+        const th = entetes[td.cellIndex];
+        const col = th && th.tagName === 'TH' ? th.textContent : 'colonne ' + (td.cellIndex + 1);
+        const lib = tr.cells[0] && tr.cells[0] !== td && tr.cells[0].textContent.trim();
+        const ligne = lib ? lib.slice(0, 25) : 'ligne ' + tr.rowIndex;
+        const r = td.getBoundingClientRect();
+        // Colonne étroite ou centrée (OK / Écart / SO, oui / non) : une case.
+        if ((td.classList.contains('c') || r.width < 9 * MM) && r.width < 16 * MM && r.height < 9 * MM) {
+          const c = 4 * MM;
+          poser('case', boite(r, (r.width - c) / 2, (r.height - c) / 2, c, c), col + ' ' + ligne);
+        } else {
+          poser('texte', boite(r, 1, 1, r.width - 2, r.height - 2), col + ' ' + ligne, r.height > 9 * MM);
+        }
+      });
+
+      // Lignes à écrire, précédées de leur libellé.
+      page.querySelectorAll('.ms-ligne, .pr-champ, .fr-sig-case, .ms-score-box, .ms-role-champs .v, .ms-urgences .vide > b').forEach((el) => {
+        if (fait.has(el) || exclu(el) || el.closest('td') && el.closest('td').textContent.trim() || el.textContent.trim()) return;
+        const r = el.getBoundingClientRect();
+        const lab = el.parentElement.querySelector('.ms-lab, .fr-sig-lab, span > b');
+        const nom = lab ? lab.textContent : (el.closest('td') ? 'Échéance' : 'Ligne');
+        // Une ligne inline (.pr-champ) n'a qu'une hauteur de texte : on rehausse la zone.
+        const h = Math.max(r.height, 5 * MM);
+        poser('texte', boite(r, 0, r.height - h, r.width, h), nom, h > 9 * MM);
+      });
+
+      // Cadres de signature et zones libres pointillées.
+      page.querySelectorAll('.ms-signatures > div, .ms-zone').forEach((el) => {
+        if (fait.has(el) || exclu(el) || (el.classList.contains('ms-zone') && el.textContent.trim())) return;
+        const r = el.getBoundingClientRect();
+        let haut = 0;
+        el.querySelectorAll('.ms-lab, small').forEach((t) => {
+          haut = Math.max(haut, t.getBoundingClientRect().bottom - r.top);
+        });
+        const lab = el.querySelector('.ms-lab');
+        poser('texte', boite(r, 2 * MM, haut + 1, r.width - 4 * MM, r.height - haut - 2 * MM),
+          lab ? lab.textContent : 'Zone libre', true);
+      });
+
+      // Cases à cocher : la case est dessinée en ::before, à gauche de l'élément.
+      page.querySelectorAll('.ms-case').forEach((el) => {
+        if (fait.has(el) || exclu(el)) return;
+        const r = el.getBoundingClientRect();
+        const c = 3.8 * MM;
+        poser('case', boite(r, 0, (r.height - c) / 2, c, c), el.textContent);
+      });
+      page.querySelectorAll('.pr-check:not(.pr-cas) li').forEach((el) => {
+        if (fait.has(el) || exclu(el)) return;
+        const r = el.getBoundingClientRect();
+        const c = 4.2 * MM;
+        poser('case', boite(r, 0, 1.7 * MM, c, c), el.textContent);
+      });
+    });
+
+    const vieux = document.getElementById('samsic-champs');
+    if (vieux) vieux.remove();
+    const s = document.createElement('script');
+    s.type = 'application/json';
+    s.id = 'samsic-champs';
+    s.textContent = JSON.stringify(liste).replace(/</g, '\\u003c');
+    document.body.appendChild(s);
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => setTimeout(controler, 50));
   else window.addEventListener('load', controler);

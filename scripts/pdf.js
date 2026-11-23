@@ -1,11 +1,14 @@
 /* ============================================================================
    pdf.js — Imprime un document SAMSIC (page HTML du skill) en PDF
 
-   Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>]
-     sortie.pdf  par défaut : même nom que la page, extension .pdf
-     --site=id   classeur SSE : personnalise la trame pour ce site (mase-sites.js)
+   Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>] [--formulaire]
+     sortie.pdf    par défaut : même nom que la page, extension .pdf
+     --site=id     classeur SSE : personnalise la trame pour ce site (mase-sites.js)
+     --formulaire  PDF remplissable (AcroForm) : chaque zone « au stylo »
+                   (registre, ligne, case, signature) devient un vrai champ.
+                   Requiert une fois : npm install dans scripts/formulaire.
 
-   Utilise Chrome ou Edge en mode headless (aucune dépendance npm).
+   Utilise Chrome ou Edge en mode headless (aucune dépendance npm sans --formulaire).
    Avant d'imprimer, contrôle la page :
      - feuilles qui débordent (texte coupé en bas) ;
      - repères [[…]] restés dans le texte (contenu non rédigé).
@@ -22,9 +25,10 @@ const { pathToFileURL } = require('url');
 
 const args = process.argv.slice(2);
 const site = (args.find((a) => a.startsWith('--site=')) || '').slice(7);
+const formulaire = args.includes('--formulaire');
 const [entree, sortieArg] = args.filter((a) => !a.startsWith('--'));
 if (!entree) {
-  console.error('Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>]');
+  console.error('Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>] [--formulaire]');
   process.exit(1);
 }
 const page = path.resolve(entree);
@@ -58,8 +62,9 @@ const communs = ['--headless=new', '--disable-gpu', '--no-pdf-header-footer',
 
 // 1. Contrôle : le DOM rendu, après chargement des polices et des scripts.
 let alerte = false;
+let dom = '';
 try {
-  const dom = execFileSync(nav, [...communs, '--dump-dom', url],
+  dom = execFileSync(nav, [...communs, '--dump-dom', url],
     { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] });
   const deb = [...dom.matchAll(/data-deborde="(\d+)"/g)].map((m) => +m[1]);
   if (deb.length) {
@@ -83,4 +88,25 @@ execFileSync(nav, [...communs, '--print-to-pdf=' + sortie, url], { stdio: 'ignor
 const brut = fs.readFileSync(sortie, 'latin1');
 const pages = (brut.match(/\/Type\s*\/Page(?!s)/g) || []).length;
 console.log('PDF : ' + sortie + ' (' + pages + ' page' + (pages > 1 ? 's' : '') + ')');
-process.exit(alerte ? 2 : 0);
+
+// 3. Formulaire : vrais champs aux zones mesurées par procedure.js.
+(async () => {
+  if (formulaire) {
+    let poserChamps;
+    try {
+      poserChamps = require('./formulaire/champs');
+    } catch (e) {
+      console.error('PDF remplissable : faire une fois « npm install » dans ' + path.join(__dirname, 'formulaire'));
+      process.exit(1);
+    }
+    const m = dom.match(/<script type="application\/json" id="samsic-champs">([\s\S]*?)<\/script>/);
+    const champs = m ? JSON.parse(m[1]) : [];
+    if (!champs.length) console.log('Formulaire : aucune zone à remplir trouvée dans ce document.');
+    else {
+      const n = await poserChamps(sortie, champs);
+      const cases = champs.filter((c) => c.type === 'case').length;
+      console.log('Formulaire : ' + n + ' champs (' + (n - cases) + ' zones de texte, ' + cases + ' cases à cocher)');
+    }
+  }
+  process.exit(alerte ? 2 : 0);
+})();

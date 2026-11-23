@@ -1,0 +1,8 @@
+{
+  "name": "samsic-formulaire",
+  "private": true,
+  "description": "PDF remplissable (AcroForm) des documents SAMSIC. npm install dans ce dossier ; utilisé par scripts/pdf.js --formulaire",
+  "dependencies": {
+    "pdf-lib": "1.17.1"
+  }
+}

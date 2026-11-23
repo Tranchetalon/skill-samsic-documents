@@ -25,20 +25,36 @@ Famille `mase`, deux couleurs seulement (marine, bleu).
 
 ## Deux usages
 
-**Trame vierge** (valable pour tout site, remplie au stylo) : produire chaque onglet tel quel.
+**Trame vierge** (valable pour tout site) : produire chaque onglet tel quel, **remplissable** par
+défaut (`--formulaire`) : on la remplit à l'écran ou on l'imprime pour le stylo, au choix.
 ```
-node "<skill>/scripts/pdf.js" "<dossier>/mase-03-risques.html" "<dossier>/03 - Risques du poste et urgences.pdf"
+node "<skill>/scripts/pdf.js" "<dossier>/mase-03-risques.html" "<dossier>/03 - Risques du poste et urgences.pdf" --formulaire
 ```
+Sans `--formulaire` seulement si l'utilisateur veut un PDF strictement « papier ».
 
 **Classeur personnalisé pour un site** : renseigner le site dans `mase-sites.js` (structure
 documentée en tête du fichier : nom, adresse, code contrat, plan de prévention, agents et dates de
 carte pro, causeries, remontées, accidents), puis produire les 6 onglets qui se personnalisent
 (00, 01, 02, 05, 06, 09) avec `--site=<id>` :
 ```
-node "<skill>/scripts/pdf.js" "<dossier>/mase-02-competences.html" "<dossier>/<Site>/02 - Accueil, parrainage et habilitations.pdf" --site=<id>
+node "<skill>/scripts/pdf.js" "<dossier>/mase-02-competences.html" "<dossier>/<Site>/02 - Accueil, parrainage et habilitations.pdf" --site=<id> --formulaire
 ```
+Les cases déjà renseignées depuis `mase-sites.js` (agents, échéances, causeries faites) restent
+imprimées ; seules les cases encore vides deviennent des champs.
 Les onglets 03, 04, 07, 08 restent communs. `mase-sites.js` contient des données personnelles
 d'agents : il reste dans le dossier du document, **jamais dans le dépôt du skill**.
+
+## Modifier un onglet existant
+
+- Classeur déjà produit pour l'agence : modifier la page source (dossier du document, ou
+  `GenerateurDocs/fiches-procedures/mase-*.html` à Lyon), jamais le PDF ; puis régénérer l'onglet
+  touché, pour la trame commune **et** pour chaque site concerné (`--site=`).
+- Ajouter une page dans un onglet : copier une page voisine (`div.doc-page`), garder la suite
+  des sous-titres `N · Titre` et mettre à jour « Dans cet onglet » sur l'intercalaire.
+- Ajouter un onglet : copier l'onglet le plus proche, languette `--n:` suivante, ligne ajoutée
+  au sommaire de `mase-00-ouverture.html`. La languette ne prévoit que 9 positions : au-delà,
+  regrouper plutôt que créer un 10e onglet.
+- Mettre `data-maj` à la date du jour.
 
 ## Adapter un onglet ou en créer un
 
