@@ -29,16 +29,37 @@ Modèle : `modeles/fiche-reflexe.html` (type `fiche-reflexe`).
 
 ## Densité
 
-- 4 étapes : `class="doc-page fr-page"`.
-- 5 étapes : ajouter `compact`. 6 étapes : `compact tres-compact`.
+- Par défaut `class="doc-page fr-page"`, même à 5 ou 6 étapes courtes.
+- Seulement si `pdf.js` signale un débordement : ajouter `compact`, puis `compact tres-compact`.
+  Le mode compact sur une fiche qui tient laisse un grand vide en bas de feuille.
 - Au-delà de 6 étapes ou s'il faut un verso : ce n'est plus une fiche réflexe → **consigne agents**.
 - La taille du texte des étapes ne change jamais : on resserre les blancs, pas les lettres.
 
-## Collection
+## Collection : un dossier par catégorie, une numérotation par catégorie
 
-Les fiches réflexes d'une agence sont **numérotées** (« 01 - Remplacement de vêtement »…).
-Demander le prochain numéro libre s'il n'est pas connu, et nommer le PDF
-`NN - Titre sans accent.pdf`.
+Fiches réflexes et consignes agents se rangent ensemble, **par catégorie**, chacune avec sa
+propre numérotation. Nom du PDF : `<Catégorie> - NN - Titre sans accent.pdf`, dans le dossier
+`<Catégorie>/`.
+
+| Catégorie (dossier et préfixe) | Contenu | Famille habituelle |
+|---|---|---|
+| `RH` | congés, RCR, heures sup, journée de solidarité, paie, frais, adresse/RIB | `rh`, `consigne` |
+| `Operationnel` | prise de service, PTI, main courante et rapports Guardtek, vie du poste | `exploitation` |
+| `Incidents` | astreinte, alerte PTI, incident majeur, incivilités, accident | `incident` |
+| `Sante` | déclaration d'AT, arrêt maladie, reprise | `sante` |
+| `Materiel` | tenue, entretien, matériel défectueux ou perdu, restitution | `equipement` |
+| `Vehicules` | véhicule de service, carte carburant, permis | `exploitation` |
+
+Exemples : `RH/RH - 03 - Repos compensateurs RCR et RCN.pdf`,
+`Incidents/Incidents - 02 - Alerte PTI lever le doute.pdf`.
+
+- Prendre le **prochain numéro libre de la catégorie** : regarder le dossier de collection de
+  l'agence (à Lyon : `SAMSIC/PDF/03 - Fiches reflexes/<Catégorie>/`). Si le dossier n'est pas
+  connu, demander où sont rangées les fiches.
+- Une fiche placée au milieu d'un thème (ex. une deuxième fiche congés) peut prendre la place
+  logique, à condition de renuméroter la suite de la catégorie et de mettre à jour le fichier
+  `Correspondance anciens numeros.csv` du dossier de collection.
+- Une nouvelle catégorie seulement si aucune ne convient, et après accord de l'utilisateur.
 
 ## Exemple de bonne carte
 

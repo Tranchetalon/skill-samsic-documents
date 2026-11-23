@@ -86,7 +86,9 @@ On ne retouche **jamais le PDF** : on modifie la page HTML source, puis on rég�
 
 Nom du PDF : `<Type> - <Sujet> - <Site ou date>.pdf`, sans caractères interdits (`/ \ : * ? " < > |`).
 Exemples : `Cahier de consignes - Dépôt de Cournon.pdf`, `REX - Exercice alerte drone - 12-10-2026.pdf`,
-`25 - Repos compensateurs RCR et RCN.pdf` (fiches numérotées dans la collection de l'agence).
+et pour les fiches réflexes et consignes agents, rangées par catégorie avec une numérotation
+par catégorie : `RH/RH - 03 - Repos compensateurs RCR et RCN.pdf`
+(voir [fiche-reflexe.md](references/fiche-reflexe.md#collection--un-dossier-par-catégorie-une-numérotation-par-catégorie)).
 
 ## 3. Règles qui ne se discutent pas
 
