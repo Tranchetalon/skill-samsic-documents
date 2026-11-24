@@ -25,19 +25,18 @@ Famille `mase`, deux couleurs seulement (marine, bleu).
 
 ## Deux usages
 
-**Trame vierge** (valable pour tout site) : produire chaque onglet tel quel, **remplissable** par
-défaut (`--formulaire`) : on la remplit à l'écran ou on l'imprime pour le stylo, au choix.
+**Trame vierge** (valable pour tout site) : produire chaque onglet tel quel. Comme tous les PDF
+du skill, il sort **remplissable** : on le remplit à l'écran ou on l'imprime pour le stylo, au choix.
 ```
-node "<skill>/scripts/pdf.js" "<dossier>/mase-03-risques.html" "<dossier>/03 - Risques du poste et urgences.pdf" --formulaire
+node "<skill>/scripts/pdf.js" "<dossier>/mase-03-risques.html" "<dossier>/03 - Risques du poste et urgences.pdf"
 ```
-Sans `--formulaire` seulement si l'utilisateur veut un PDF strictement « papier ».
 
 **Classeur personnalisé pour un site** : renseigner le site dans `mase-sites.js` (structure
 documentée en tête du fichier : nom, adresse, code contrat, plan de prévention, agents et dates de
 carte pro, causeries, remontées, accidents), puis produire les 6 onglets qui se personnalisent
 (00, 01, 02, 05, 06, 09) avec `--site=<id>` :
 ```
-node "<skill>/scripts/pdf.js" "<dossier>/mase-02-competences.html" "<dossier>/<Site>/02 - Accueil, parrainage et habilitations.pdf" --site=<id> --formulaire
+node "<skill>/scripts/pdf.js" "<dossier>/mase-02-competences.html" "<dossier>/<Site>/02 - Accueil, parrainage et habilitations.pdf" --site=<id>
 ```
 Les cases déjà renseignées depuis `mase-sites.js` (agents, échéances, causeries faites) restent
 imprimées ; seules les cases encore vides deviennent des champs.

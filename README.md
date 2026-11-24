@@ -24,8 +24,8 @@ git clone <adresse du dépôt> "%USERPROFILE%\.claude\skills\samsic-documents"
 Puis, **une seule fois**, ouvrir `agence.js` et mettre l'identité de votre agence
 (provenance du pied de page et numéros d'agrément CNAPS).
 
-PDF remplissables (registres, classeur SSE, formulaires à compléter à l'écran) :
-`cd scripts/formulaire` puis `npm install`. Claude le fait lui-même au premier besoin.
+Tous les PDF produits sont **remplissables à l'écran** (formulaire AcroForm). La bibliothèque
+nécessaire s'installe toute seule au premier PDF (connexion internet requise une fois).
 
 Export Word (facultatif) : `cd scripts/word` puis `npm install`.
 
@@ -46,7 +46,7 @@ si Git le demande.
 | `references/` | charte, règles de rédaction, structure de chaque type de document, catalogue des composants |
 | `modeles/` | un modèle HTML par type ; le classeur SSE complet (10 onglets) |
 | `socle/` | polices, CSS, icônes, logo : la charte graphique |
-| `scripts/` | `nouveau.js` (crée un document), `pdf.js` (imprime et contrôle ; `--formulaire` pour un PDF remplissable), `formulaire/` (champs AcroForm), `word/` (export Word) |
+| `scripts/` | `nouveau.js` (crée un document), `pdf.js` (imprime, contrôle et rend remplissable ; `--sans-formulaire` pour un PDF papier), `formulaire/` (champs AcroForm), `word/` (export Word) |
 | `agence.js` | identité de votre agence |
 
 ## Règles de partage

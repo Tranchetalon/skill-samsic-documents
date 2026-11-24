@@ -5,14 +5,20 @@ on coche, on enregistre. Il s'ouvre dans Adobe Acrobat Reader, Edge, Chrome, Fir
 plupart des lecteurs. Les champs sont **transparents** : le PDF imprimé vierge est identique au
 PDF classique, et une feuille remplie à l'écran s'imprime avec le texte saisi en marine.
 
-## Produire
+## Produire : c'est automatique
 
+**Règle de la maison : tous les PDF produits sont remplissables**, pour qu'on puisse compléter
+un formulaire, un registre ou une fiche à l'écran sans le réimprimer. `pdf.js` pose les champs
+sans option :
 ```
-node "<skill>/scripts/pdf.js" "<page>.html" "<Nom final>.pdf" --formulaire
-node "<skill>/scripts/pdf.js" "<dossier>/mase-02-competences.html" "<sortie>.pdf" --site=<id> --formulaire
+node "<skill>/scripts/pdf.js" "<page>.html" "<Nom final>.pdf"
+node "<skill>/scripts/pdf.js" "<dossier>/mase-02-competences.html" "<sortie>.pdf" --site=<id>
 ```
-Première fois seulement : `npm install` dans `<skill>/scripts/formulaire` (bibliothèque pdf-lib).
-Le script annonce le nombre de champs posés (zones de texte, cases à cocher).
+Le script annonce le nombre de champs posés (zones de texte, cases à cocher). Un document sans
+zone à remplir reste un PDF normal. La bibliothèque pdf-lib s'installe toute seule au premier
+usage sur un poste (`npm install` dans `<skill>/scripts/formulaire`).
+
+PDF « papier » uniquement, sur demande expresse : ajouter `--sans-formulaire`.
 
 ## Ce qui devient un champ, sans rien annoter
 

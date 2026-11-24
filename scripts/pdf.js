@@ -1,14 +1,16 @@
 /* ============================================================================
    pdf.js — Imprime un document SAMSIC (page HTML du skill) en PDF
 
-   Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>] [--formulaire]
-     sortie.pdf    par défaut : même nom que la page, extension .pdf
-     --site=id     classeur SSE : personnalise la trame pour ce site (mase-sites.js)
-     --formulaire  PDF remplissable (AcroForm) : chaque zone « au stylo »
-                   (registre, ligne, case, signature) devient un vrai champ.
-                   Requiert une fois : npm install dans scripts/formulaire.
+   Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>] [--sans-formulaire]
+     sortie.pdf         par défaut : même nom que la page, extension .pdf
+     --site=id          classeur SSE : personnalise la trame pour ce site (mase-sites.js)
+     --sans-formulaire  PDF « papier » seul. Par défaut, le PDF est REMPLISSABLE
+                        (AcroForm) : chaque zone « au stylo » (registre, ligne, case,
+                        signature) devient un vrai champ. Un document sans zone à
+                        remplir reste un PDF normal.
 
-   Utilise Chrome ou Edge en mode headless (aucune dépendance npm sans --formulaire).
+   Utilise Chrome ou Edge en mode headless, et pdf-lib pour les champs
+   (installé automatiquement dans scripts/formulaire au premier besoin).
    Avant d'imprimer, contrôle la page :
      - feuilles qui débordent (texte coupé en bas) ;
      - repères [[…]] restés dans le texte (contenu non rédigé).
@@ -25,10 +27,11 @@ const { pathToFileURL } = require('url');
 
 const args = process.argv.slice(2);
 const site = (args.find((a) => a.startsWith('--site=')) || '').slice(7);
-const formulaire = args.includes('--formulaire');
+// AcroForm par défaut (--formulaire, ancienne option, est accepté et sans effet).
+const formulaire = !args.includes('--sans-formulaire');
 const [entree, sortieArg] = args.filter((a) => !a.startsWith('--'));
 if (!entree) {
-  console.error('Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>] [--formulaire]');
+  console.error('Usage : node pdf.js <page.html> [sortie.pdf] [--site=<id>] [--sans-formulaire]');
   process.exit(1);
 }
 const page = path.resolve(entree);
@@ -91,22 +94,28 @@ console.log('PDF : ' + sortie + ' (' + pages + ' page' + (pages > 1 ? 's' : '') 
 
 // 3. Formulaire : vrais champs aux zones mesurées par procedure.js.
 (async () => {
-  if (formulaire) {
+  const m = dom.match(/<script type="application\/json" id="samsic-champs">([\s\S]*?)<\/script>/);
+  const champs = formulaire && m ? JSON.parse(m[1]) : [];
+  if (formulaire && !champs.length) console.log('Formulaire : aucune zone à remplir, PDF normal.');
+  if (champs.length) {
+    const dossier = path.join(__dirname, 'formulaire');
     let poserChamps;
     try {
       poserChamps = require('./formulaire/champs');
     } catch (e) {
-      console.error('PDF remplissable : faire une fois « npm install » dans ' + path.join(__dirname, 'formulaire'));
-      process.exit(1);
+      // Premier usage sur ce poste : on installe pdf-lib, une fois pour toutes.
+      console.log('Formulaire : installation de pdf-lib (une seule fois)…');
+      try {
+        require('child_process').execSync('npm install --no-audit --no-fund', { cwd: dossier, stdio: 'ignore' });
+        poserChamps = require('./formulaire/champs');
+      } catch (e2) {
+        console.log('ATTENTION : PDF produit SANS champs remplissables. Faire « npm install » dans ' + dossier);
+        process.exit(2);
+      }
     }
-    const m = dom.match(/<script type="application\/json" id="samsic-champs">([\s\S]*?)<\/script>/);
-    const champs = m ? JSON.parse(m[1]) : [];
-    if (!champs.length) console.log('Formulaire : aucune zone à remplir trouvée dans ce document.');
-    else {
-      const n = await poserChamps(sortie, champs);
-      const cases = champs.filter((c) => c.type === 'case').length;
-      console.log('Formulaire : ' + n + ' champs (' + (n - cases) + ' zones de texte, ' + cases + ' cases à cocher)');
-    }
+    const n = await poserChamps(sortie, champs);
+    const cases = champs.filter((c) => c.type === 'case').length;
+    console.log('Formulaire : ' + n + ' champs (' + (n - cases) + ' zones de texte, ' + cases + ' cases à cocher)');
   }
   process.exit(alerte ? 2 : 0);
 })();

@@ -89,7 +89,7 @@ CSS à charger, dans l'ordre : `fonts`, `doc`, `fiche-reflexe`, `procedure`, pui
 
 Toute zone « au stylo » de ce catalogue (cellule vide, `ms-ligne`, `pr-champ`, `ms-case`,
 `pr-check`, `ms-signatures`, `ms-zone`…) devient automatiquement un champ avec
-`pdf.js --formulaire`. Attributs pour cas particuliers : `data-champ="Nom"` (forcer un champ
+`pdf.js` (tous les PDF sont remplissables). Attributs pour cas particuliers : `data-champ="Nom"` (forcer un champ
 texte), `data-champ-type="case"` (case à cocher), `data-champ="non"` (exclure). Détails :
 [pdf-remplissable.md](pdf-remplissable.md).
 
